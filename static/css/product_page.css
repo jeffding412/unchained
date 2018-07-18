@@ -1,0 +1,14 @@
+.main_item {
+	height: 400px;
+	width: 80%;
+}
+.item {
+	height: 75px;
+	width: 75px;
+	list-style-type: none;
+	display: inline-block;
+}
+.cart {
+	height: 25px;
+	width: 25px;
+}
