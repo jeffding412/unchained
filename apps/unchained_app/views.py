@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.contrib import messages
+import bcrypt
 
 # Create your views here.
 def index(request):
-    response="Hello World"
-    return HttpResponse(response)
+    return render(request, "unchained_app/index.html")
