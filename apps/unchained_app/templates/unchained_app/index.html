@@ -9,7 +9,12 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="css/index.css"/>
+        <style>
+            .header {
+                padding: 50px;
+            }
+        </style>
+        <!-- <link rel="stylesheet" href="css/index.css"/> -->
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,14 +45,24 @@
                                     <!-- Form to send information to login or register user -->
                                     <div class="modal-body">
                                         <form action="/loginOrRegister" method="POST">
+                                            {% csrf_token %}
                                             <div class="form-group">
                                                 <label>Email address</label>
-                                                <input type="text" class="form-control" placeholder="Enter email">
+                                                {% if request.session.errors.email %}
+                                                    <p class="text-danger">{{request.session.errors.email}}</p>
+                                                {% endif %} 
+                                                <input type="text" class="form-control" name="email" placeholder="Enter email">
                                             </div>
                                             <div class="form-group">
                                                 <label>Password</label>
-                                                <input type="password" class="form-control" placeholder="Password">
+                                                {% if request.session.errors.password %}
+                                                    <p class="text-danger">{{request.session.errors.password}}</p>
+                                                {% endif %}
+                                                <input type="password" class="form-control" name="password" placeholder="Password">
                                             </div>
+                                            {% if request.session.errors.failure %}
+                                                <p class="text-danger">{{request.session.errors.failure}}</p>
+                                            {% endif %} 
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
                                     </div>
