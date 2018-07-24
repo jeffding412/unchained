@@ -50,37 +50,52 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Image</th>
-                        <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Seller Name</th>
-                        <th>Date Added</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                    <th>Image</th>
+                    <th>Product ID</th>
+                    <th>Name</th>
+                    <th>Inventory Count</th>
+                    <th>Quantity Sold</th>
+                    <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for product in products %}
-                        <tr>
-                            <td>{{ product.image }}</td>
-                            <td>{{ product.id }}</td>
-                            <td>{{ product.name }}</td>
-                            <td>{{ product.seller.name }}</td>
-                            <td>{{ product.created_at }}</td>
-                            <td>{{ product.category }}</td>
-                            <td>{{ product.price }}</td>
-                            <td>{{ product.status }}</td>
-                            <td>
-                                <a href="{% url 'adminProductId' productId=product.id %}">Show</a> | 
-                                <a href="{% url 'adminEdit' productId=product.id %}">Edit</a> | 
-                                <a href="{% url 'adminDelete' productId=product.id %}">Delete</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                    <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                        <td>mary@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Dooley</td>
+                        <td>july@example.com</td>
+                    </tr>
                 </tbody>
             </table>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </body>
 </html>
