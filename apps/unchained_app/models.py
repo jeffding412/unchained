@@ -38,7 +38,7 @@ class Shipping(models.Model):
     country = models.CharField(max_length=255)
     zip = models.IntegerField()
     
-    user_id = ForeignKey(User, related_name="shippings")
+    user_id = models.ForeignKey(User, related_name="shippings")
 
     objects = ShippingManager()
 
@@ -56,9 +56,9 @@ class Product(models.Model):
     description = models.TextField()
     status = models.CharField(max_length=255)
 
-    seller_id = ForeignKey(User, related_name="products")
+    seller_id = models.ForeignKey(User, related_name="products")
 
-    objects = ProductManager
+    objects = ProductManager()
 
 
 class ImageManager(models.Manager):
@@ -67,7 +67,7 @@ class ImageManager(models.Manager):
         return errors
 
 class Image(models.Model):
-    name = models.CharField(max_length)
+    name = models.CharField(max_length=255)
     product_id = models.ForeignKey(Product, related_name="images")
 
     objects = ImageManager()
