@@ -82,6 +82,7 @@ class Offer(models.Model):
     price = models.FloatField()
     product_id = models.ForeignKey(Product, related_name="offers")
     user_id = models.ForeignKey(User, related_name="offers")
+    message = models.TextField()
 
     objects = OfferManager()
 
