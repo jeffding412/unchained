@@ -7,6 +7,27 @@ from .models import User, Shipping, Product, Image, Offer
 def index(request):
     return render(request, "unchained_app/index.html")
 
+<<<<<<< HEAD
+=======
+def adminLoginForm(request):
+    return render(request, "/unchained/admin.html")
+
+def adminProducts(request):
+    return render(request, "/unchained/admin_products.html")
+
+def adminProductById(request):
+    return render(request, "/unchained/admin_product_id.html")
+
+def adminEdit(request, productId):
+    context = {
+        "productId": productId
+    }
+    return render(request, "/unchained/admin_editProduct.html", context)
+
+def adminDelete(request, productId):
+    return redirect("/admin/products")
+
+>>>>>>> origin/master
 def login_or_register(request):
     user = User.objects.filter(email=request.POST['email'])
     request.session['errors'] = User.objects.validator(request.POST)
@@ -19,10 +40,14 @@ def login_or_register(request):
 
     if len(user) == 0:
         pw_hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
-        User.objects.create(email=request.POST['email'],password_hash=pw_hash,first_name="",last_name="",rating=0,num_sold=0,isAdmin=False)
-    
+        user = User.objects.create(email=request.POST['email'],password_hash=pw_hash,username="",first_name="",last_name="",rating=0,num_sold=0,isAdmin=False)
+        request.session['user_id'] = user.id
+    else:
+        request.session['user_id'] = user[0].id
+
     return redirect('/')
 
+<<<<<<< HEAD
 def adminLoginForm(request):
     if "curUserId" in request.session["curUserId"]:
         if User.objects.get(id=request.session["curUserId"]).isAdmin:
@@ -116,3 +141,8 @@ def logout(request):
     request.session.clear()
     redirect("/")
 
+=======
+def logout(request):
+    request.session.clear()
+    return redirect('/')
+>>>>>>> origin/master
