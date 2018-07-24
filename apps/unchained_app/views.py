@@ -7,7 +7,6 @@ from .models import User, Shipping, Product, Image, Offer
 def index(request):
     return render(request, "unchained_app/index.html")
 
-<<<<<<< HEAD
 def adminLoginForm(request):
     return render(request, "/unchained/admin.html")
 
@@ -25,7 +24,7 @@ def adminEdit(request, productId):
 
 def adminDelete(request, productId):
     return redirect("/admin/products")
-=======
+
 def login_or_register(request):
     user = User.objects.filter(email=request.POST['email'])
     request.session['errors'] = User.objects.validator(request.POST)
@@ -38,7 +37,13 @@ def login_or_register(request):
 
     if len(user) == 0:
         pw_hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
-        User.objects.create(email=request.POST['email'],password_hash=pw_hash,first_name="",last_name="",rating=0,num_sold=0,isAdmin=False)
-    
+        user = User.objects.create(email=request.POST['email'],password_hash=pw_hash,username="",first_name="",last_name="",rating=0,num_sold=0,isAdmin=False)
+        request.session['user_id'] = user.id
+    else:
+        request.session['user_id'] = user[0].id
+
     return redirect('/')
->>>>>>> origin/master
+
+def logout(request):
+    request.session.clear()
+    return redirect('/')

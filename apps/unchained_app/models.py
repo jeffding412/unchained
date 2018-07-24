@@ -30,6 +30,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password_hash = models.CharField(max_length=255)
+    username = models.CharField(max_length=255)
     rating = models.FloatField()
     num_sold = models.IntegerField()
     isAdmin = models.BooleanField()
