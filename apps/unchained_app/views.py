@@ -27,12 +27,15 @@ def login_or_register(request):
     return redirect('/')
 
 def adminLoginForm(request):
-    if "curUserId" in request.session["curUserId"]:
+    if "curUserId" in request.session.keys():
+        if "curUserId" not in request.session.keys():
+            return redirect("/")
+
         if User.objects.get(id=request.session["curUserId"]).isAdmin:
-            return redirect("/admin/products")
+            return redirect("/admins/products")
         return redirect("/products")
 
-    return render(request, "/unchained/admin.html")
+    return render(request, "unchained_app/admin.html")
 
 def adminLogin(request):
     if request.method != "POST":
@@ -41,14 +44,25 @@ def adminLogin(request):
     errors = User.objects.validator_admin(request.POST)
 
     if len(errors) > 0:
-        return redirect("/admin")
+        for tag, error in errors.items():
+            messages.error(request, error, tag)
+        return redirect("/admins")
 
     request.session["curUserId"] = User.objects.get(email=request.POST["email"]).id
-    return redirect("/admin/products")
+    return redirect("/admins/products")
 
 def adminProducts(request):
-    if "curUserId" not in request.session["curUserId"]:
-        return redirect("/")
+    # if "curUserId" not in request.session.keys():
+    #     return redirect("/")
+
+    # if len(Product.objects.filter(id=productId)) == 0:
+    #     return redirect("/admins/products")
+
+    # context = {
+    #     "products": Product.objects.all()
+    # }
+
+    return render(request, "unchained_app/admin_products.html")
 
 def add_product(request):
     if not "user_id" in request.session:
@@ -59,21 +73,46 @@ def add_product(request):
         "user": user
     }
 
-    return render(request, "/unchained/admin_product_id.html")
+    return render(request, "unchained_app/admin_product_id.html")
+
+def adminProductById(request, productId):
+    # if "curUserId" not in request.session.keys():
+    #     return redirect("/")
+
+    # if len(Product.objects.filter(id=productId)) == 0:
+    #     return redirect("/admins/products")
+
+    # product = Product.objects.get(id=productId)
+    # seller = User.objects.get(id=product.seller_id)
+
+    # context = {
+    #     "product": product,
+    #     "seller": seller,
+    #     "shipping": seller.shippings.first()
+    # }
+
+    return render(request, "unchained_app/admin_product_id.html")
 
 def adminEdit(request, productId):
-    if "curUserId" not in request.session["curUserId"]:
-        return redirect("/")
+    # if "curUserId" not in request.session.keys():
+    #     return redirect("/")
 
-    context = {
-        "product": Product.objects.get(id=productId)
-    }
-    return render(request, "/unchained/admin_editProduct.html", context)
+    # if not User.objects.get(id=request.session["curUserId"]).isAdmin:
+    #     return redirect("/logout")
+
+    # if len(Product.objects.filter(id=productId)) == 0:
+    #     return redirect("/admins/products")
+
+    # context = {
+    #     "product": Product.objects.get(id=productId)
+    # }
+
+    return render(request, "unchained_app/admin_editProduct.html")
 
 def adminProcessEdit(request, productId):
     if request.method != "POST":
         if User.objects.get(id=request.session["curUserId"]).isAdmin:
-            return redirect("/admin/products")
+            return redirect("/admins/products")
         return redirect("/products")
 
     errors = Product.objects.validator(request.POST)
@@ -81,7 +120,7 @@ def adminProcessEdit(request, productId):
     if len(errors) > 0:
         for tag, error in errors.items():
             messages.error(request, error, extra_tages=tag)
-        return redirect("/admin/products/" + str(productId) + "/edit")
+        return redirect("/admins/products/" + str(productId) + "/edit")
 
     product = Product.objects.get(id=productId)
     product.name = request.POST["name"]
@@ -94,7 +133,7 @@ def adminProcessEdit(request, productId):
     return redirect("/admin/products/" + str(productId))
 
 def adminDelete(request, productId):
-    if "curUserId" not in request.session["curUserId"]:
+    if "curUserId" not in request.session.keys():
         return redirect("/")
 
     # make sure none admins can't access product deleting route

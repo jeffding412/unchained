@@ -4,7 +4,8 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Product</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="css/admin_product_id.css">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/admin_product_id.css' %}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -41,9 +42,9 @@
                 <p>Seller ID: {{ seller.id }}</p>
                 <p>Seller name: {{ seller.name }}</p><br/>
                 <h3>Shipping Info:</h3>
-                <p>{{ shipping.first_name }} {{ seller.shipping.last_name }}</p>
+                <p>{{ shipping.first_name }} {{ shipping.last_name }}</p>
                 <p>{{ shipping.address }}</p>
-                <p>{{ shipping.city }}, {{ seller.shipping.state }} {{ seller.shipping.zip }}</p>
+                <p>{{ shipping.city }}, {{ shipping.state }} {{ shipping.zip }}</p>
                 <p>{{ shipping.country }}</p>
             </div>
         </div>

@@ -29,7 +29,8 @@
             </nav>
 
             <h1>Edit Product - ID {{ product.id }}</h1>
-            <form action="{% url 'processEdit' productId=product.id %}" method="post">
+            <form action="{% url 'adminProcessEdit' productId=product.id %}" method="post">
+                {% csrf_token %}
                 <p>Name: <input type="text" name="name" value="{{ product.name }}"></p>
                 <p>Brand: <input type="text" name="brand" value="{{ product.brand }}"></p>
                 <p>Description:</p>
