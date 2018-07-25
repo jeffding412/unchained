@@ -4,7 +4,7 @@ import re
 import bcrypt
 
 EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
-PRICE_REGEX = re.compile(r"(^[0-9]+\.+\d+\d+$)")
+PRICE_REGEX = re.compile(r"(^\d+(.\d{1,2})?$)")
 
 # Create your models here.
 class UserManager(models.Manager):
@@ -115,7 +115,7 @@ class ProductManager(models.Manager):
         if len(postData["name"]) < 1:
             errors["name"] = "Name cannot be blank"
 
-        if len(postData["name"]) < 1:
+        if len(postData["brand"]) < 1:
             errors["brand"] = "Brand cannot be blank"
 
         if len(postData["category"]) < 1:
