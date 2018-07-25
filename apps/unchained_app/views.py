@@ -20,6 +20,7 @@ def login_or_register(request):
     if len(user) == 0:
         pw_hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
         user = User.objects.create(email=request.POST['email'],password_hash=pw_hash,username="",first_name="",last_name="",rating=0,num_sold=0,isAdmin=False)
+        Shipping.objects.create(first_name="",last_name="",address="",city="",state="",country="",zipcode="",)
         request.session['user_id'] = user.id
     else:
         request.session['user_id'] = user[0].id
@@ -182,4 +183,11 @@ def settings(request, id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
-    return render(request, "unchained_app/settings.html")   
+    user = User.objects.get(id=request.session['user_id'])
+    shipping_info = Shipping.objects.get(user_id=user.id)
+    context = {
+        "user": user,
+        "shipping": shipping_info
+    }    
+
+    return render(request, "unchained_app/settings.html", context)   

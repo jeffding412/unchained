@@ -101,7 +101,7 @@ class Shipping(models.Model):
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=2)
     country = models.CharField(max_length=255)
-    zip = models.IntegerField()
+    zipcode = models.CharField(max_length=255)
     
     user_id = models.ForeignKey(User, related_name="shippings")
 
