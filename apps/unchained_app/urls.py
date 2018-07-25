@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^admin/products/(?P<productId>\d+)/delete$', views.adminDelete, name="adminDelete"),
     url(r'^loginOrRegister$', views.login_or_register),
     url(r'^logout$', views.logout),
+    url(r'^addProduct$', views.add_product),
 ]
