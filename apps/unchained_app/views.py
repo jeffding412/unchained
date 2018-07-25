@@ -162,12 +162,24 @@ def add_product_to_id(request, id):
         return redirect('/addProduct')
 
     user = User.objects.get(id=request.session['user_id'])
-    context = {
-        "user": user
-    }    
 
     Product.objects.create(name=request.POST['name'],brand=request.POST['brand'],category=request.POST['category'],price=float(request.POST['price']),description=request.POST['description'],status="For Sale",seller_id=user)
 
-    print(Product.objects.all().values())
-
     return redirect('/')
+
+def messages(request, id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    # user = User.objects.get(id=request.session['user_id'])
+    # context = {
+    #     "user": user
+    # }    
+
+    return render(request, "unchained_app/messages.html")
+
+def settings(request, id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    return render(request, "unchained_app/settings.html")   

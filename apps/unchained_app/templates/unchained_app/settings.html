@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Add Product Page</title>
+        <title>Settings</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
                                     </div>
                                     <!-- Form to route to different user functions -->
                                     <div class="modal-body">
+                                        <a href="/addProduct" class="btn btn-primary">Sell</a>
                                         <a href="/messages/{{request.session.user_id}}" class="btn btn-primary">Messages</a>
                                         <a href="#" class="btn btn-primary">My Products</a>
-                                        <a href="/settings/{{request.session.user_id}}" class="btn btn-primary">Settings</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,56 +56,21 @@
         </nav>
 
         <div class="container">
-            <form action="/addProduct/{{request.session.user_id}}" method="POST">
+            <h1></h1>
+            <form action="" method="POST">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label>Name</label>
-                    {% if request.session.errors.name %}
-                        <p class="text-danger">{{request.session.errors.name}}</p>
-                    {% endif %} 
-                    <input type="text" class="form-control" name="name">
-                </div>
-                <div class="form-group">
-                    <label>Brand</label>
-                    {% if request.session.errors.brand %}
-                        <p class="text-danger">{{request.session.errors.brand}}</p>
-                    {% endif %} 
-                    <input type="text" class="form-control" name="brand">
-                </div>
-                <div class="form-group">
-                    <label>Price</label>
-                    {% if request.session.errors.price %}
-                        <p class="text-danger">{{request.session.errors.price}}</p>
-                    {% endif %} 
-                    <input type="text" class="form-control" name="price">
-                    <small class="form-text text-muted">Omit the "$" sign</small>
-                </div>
-                <div class="form-group">
-                    <label>Category</label>
-                    {% if request.session.errors.category %}
-                        <p class="text-danger">{{request.session.errors.category}}</p>
-                    {% endif %} 
-                    <select class="form-control" name="category">
-                        <option>Tops</option>
-                        <option>Bottoms</option>
-                        <option>Shoes</option>
-                        <option>Accessories</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Images</label>
-                    <input type="text">
-                    <button class="btn btn-outline-success">Upload</button>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    {% if request.session.errors.description %}
-                        <p class="text-danger">{{request.session.errors.description}}</p>
-                    {% endif %} 
-                    <textarea class="form-control" name="description" rows="3"></textarea>
-                </div>
-        		<button type="submit" class="btn btn-primary">Submit</button>
-        	</form>
+                <label>First Name</label>
+                <input type="text" class="form-control" name="first" placeholder="Enter email">
+            </form>
+            <form>
+                <p>Username</p>
+                <input type="text" name="username">
+                <p>Email</p>
+                <input type="text" name="email">
+                <p>Addys</p>
+                <p><i>123 Address Rd, San Jose CA 95111 </i><a href="#">Edit</a> <a href="#">Delete</a></p>
+                <button>Update</button>
+            </form>
         </div>
     </body>
 </html>
