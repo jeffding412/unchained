@@ -38,6 +38,38 @@ class UserManager(models.Manager):
             
         return errors
 
+    def update_validator(self, postData):
+        errors = {}
+
+        if len(postData['email']) < 1:
+            errors["email"] = "User email is a required field"
+        elif not EMAIL_REGEX.match(postData['email']):
+            errors["email"] = "User email is not in valid format"
+
+        if len(postData['first']) < 2:
+            errors["first"] = "User first name should be at least 2 characters"
+        elif not re.match(r"^[a-zA-Z]+$", postData['first']):
+            errors["first"] = "User first name can only contain letters"
+
+        if len(postData['last']) < 2:
+            errors["last"] = "User last name should be at least 2 characters"
+        elif not re.match(r"^[a-zA-Z]+$", postData['first']):
+            errors["last"] = "User last name can only contain letters"
+
+        if len(postData['username']) < 8:
+            errors["username"] = "Username should be at least 8 characters"
+            
+        return errors
+
+    def change_password_validator(self, postData):
+        errors = {}
+        if len(postData['password']) < 8:
+            errors["failure"] = "Password should be at least 8 characters"
+        elif postData['password'] != postData['confirm']:
+            errors["failure"] = "Passwords do not match"
+        
+        return errors
+
 class User(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)

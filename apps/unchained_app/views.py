@@ -20,7 +20,7 @@ def login_or_register(request):
     if len(user) == 0:
         pw_hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
         user = User.objects.create(email=request.POST['email'],password_hash=pw_hash,username="",first_name="",last_name="",rating=0,num_sold=0,isAdmin=False)
-        Shipping.objects.create(first_name="",last_name="",address="",city="",state="",country="",zipcode="",)
+        Shipping.objects.create(first_name="",last_name="",address="",city="",state="",country="",zipcode="",user_id=user)
         request.session['user_id'] = user.id
     else:
         request.session['user_id'] = user[0].id
@@ -190,4 +190,40 @@ def settings(request, id):
         "shipping": shipping_info
     }    
 
-    return render(request, "unchained_app/settings.html", context)   
+    return render(request, "unchained_app/settings.html", context)
+
+def update_profile(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+
+    request.session['errors'] = User.objects.update_validator(request.POST)
+    if len(request.session['errors']):
+        # redirect the user back to the form to fix the errors
+        return redirect('/settings/' + str(user.id))
+
+    user.first_name = request.POST['first']
+    user.last_name = request.POST['last']
+    user.email = request.POST['email']
+    user.username = request.POST['username']
+    user.save()
+
+    return redirect('/settings/' + str(user.id))
+
+def change_password(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+
+    request.session['errors'] = User.objects.change_password_validator(request.POST)
+    if len(request.session['errors']):
+        # redirect the user back to the form to fix the errors
+        return redirect('/settings/' + str(user.id))
+
+    pw_hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
+    user.password_hash = pw_hash
+    user.save()
+
+    return redirect('/settings/' + str(user.id))
