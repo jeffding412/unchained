@@ -47,3 +47,13 @@ def login_or_register(request):
 def logout(request):
     request.session.clear()
     return redirect('/')
+
+def add_product(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+    context = {
+        "user": user
+    }
+    return render(request, "unchained_app/add_product.html", context)

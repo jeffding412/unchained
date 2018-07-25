@@ -9,45 +9,40 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" media="screen" href="css/orders_people.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/admin_edit.css">
     </head>
     <body>
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Unchained</a>
+                <a class="navbar-brand" href="{% url 'index' %}">Unchained</a>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Orders<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{% url 'adminProducts' %}">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">log out</a>
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
                     </ul>
                 </div>
             </nav>
 
-            <h1>Edit Product - ID 1</h1>
-            <form action="" method="post">
-                <p>Name: <input type="text" name="name" value=""></p>
+            <h1>Edit Product - ID {{ product.id }}</h1>
+            <form action="{% url 'processEdit' productId=product.id %}" method="post">
+                <p>Name: <input type="text" name="name" value="{{ product.name }}"></p>
+                <p>Brand: <input type="text" name="brand" value="{{ product.brand }}"</p>
                 <p>Description:</p>
-                <p><textarea name="description"></textarea></p>
+                <p><textarea name="description">{{ product.description }}</textarea></p>
                 <p>
                     Categories:
                     <select name="category">
-                        <option value="{{ curCategory }}">{{ curCategory }}</option>
-                        {% for category in categories %}
-                            <option value="{{ category.id }}">{{ category.name }}</option>
-                        {% endfor %}
+                        <option value="{{ product.category }}">{{ product.category }}</option>
+                        <option value="Top">Top</option>
+                        <option value=""></option>
                     </select>
                 </p>
-                <p>or add new category: <input type="text" name="newCategory"></p>
-                <input type="file" name="image"><br/>
-                <input type="submit" name="preview" value="preview">
-                <input type="submit" name="update" value="update">
+                <input type="file" name="image" value="{{ product.image }}"><br/>
+                <input type="submit" name="submitEdit" value="Update">
             </form>
         </div>
     </body>
