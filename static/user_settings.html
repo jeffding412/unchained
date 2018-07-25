@@ -10,10 +10,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/index.css"/>
+    <link rel="icon" href="images/broken_chain.png">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Unchained</a>
+    <nav class="navbar navbar-expand-lg navbar-light nav_custom">
+            <a class="navbar-brand" href="#">Unchained <img class="nav_logo" src="images/broken_chain.png"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -58,11 +59,11 @@
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="" method="POST">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-light my-2 my-sm-0" style="border-color: gray" type="submit">Search</button>
                 </form>
             </div>
         </nav>
-        <div class="container">
+        <div class="container mt-2">
             <form>
                 <p>Username</p>
                 <input type="text" name="username">
