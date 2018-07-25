@@ -23,11 +23,13 @@
 
                         {% if messages %}
                             {% for message in messages %}
-                                <p class="error">{{ message }}</p>
+                                {% if message.extra_tags == "adminLogin" %}
+                                    <p class="error">{{ message }}</p>
+                                {% endif %}
                             {% endfor %}
                         {% endif %}
                         <input placeholder="Email Address" name="email" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                        <input placeholder="Password" name="password" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"><br/>
+                        <input placeholder="Password" name="password" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"><br/>
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                     </form>
                 </div>

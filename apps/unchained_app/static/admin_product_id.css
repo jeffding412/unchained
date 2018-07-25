@@ -18,3 +18,9 @@ body {
     text-align: right;
     align-content: right;
 }
+
+#productInfo, #sellerInfo {
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+}

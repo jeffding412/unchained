@@ -103,9 +103,11 @@ class ShippingManager(models.Manager):
         if len(postData["address"].replace(" ", "")) < 8:
             errors["address"] = "Address must be at least 8 characters long"
 
-        if len(postData["city"]) < 2:
-            errors["city"] = "City name must have 2+ characters"
-        elif not postData["city"].isalpha():
+        city = postData["city"].replace(" ", "")
+
+        if len(city) < 2:
+            errors["city"] = "City name must have 2+ letters"
+        elif not city.isalpha():
             errors["city"] = "Letters only for city name"
 
         if len(postData["state"]) != 2:
@@ -157,6 +159,25 @@ class ProductManager(models.Manager):
 
         if not PRICE_REGEX.match(str(postData["price"])):
             errors["price"] = "Invalid price"
+
+        if len(postData["description"].replace(" ", "")) < 1:
+            errors["description"] = "Description cannot be blank"
+
+        return errors
+
+    def validator_admin(self, postData):
+        errors = {}
+
+        if len(postData["name"]) < 1:
+            errors["name"] = "Name cannot be blank"
+
+        if len(postData["brand"]) < 1:
+            errors["brand"] = "Brand cannot be blank"
+
+        if len(postData["category"]) < 1:
+            errors["cateogry"] = "category cannot be blank"
+        elif not postData["category"].isalpha():
+            errors["category"] = "Letters only for category"
 
         if len(postData["description"].replace(" ", "")) < 1:
             errors["description"] = "Description cannot be blank"

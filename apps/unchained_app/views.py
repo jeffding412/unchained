@@ -56,14 +56,14 @@ def adminProducts(request):
     if "curUserId" not in request.session.keys():
         return redirect("/")
 
-    if len(Product.objects.filter(id=productId)) == 0:
-        return redirect("/admins/products")
+    if not User.objects.get(id=request.session["curUserId"]).isAdmin:
+        return redirect("/logout")
 
     context = {
         "products": Product.objects.all()
     }
 
-    return render(request, "unchained_app/admin_product_id.html", context)
+    return render(request, "unchained_app/admin_products.html", context)
 
 def add_product(request):
     if not "user_id" in request.session:
@@ -84,7 +84,7 @@ def adminProductById(request, productId):
         return redirect("/admins/products")
 
     product = Product.objects.get(id=productId)
-    seller = User.objects.get(id=product.seller_id)
+    seller = User.objects.get(id=product.seller_id.id)
 
     context = {
         "product": product,
@@ -116,7 +116,7 @@ def adminProcessEdit(request, productId):
             return redirect("/admins/products")
         return redirect("/products")
 
-    errors = Product.objects.validator(request.POST)
+    errors = Product.objects.validator_admin(request.POST)
 
     if len(errors) > 0:
         for tag, error in errors.items():
@@ -131,7 +131,7 @@ def adminProcessEdit(request, productId):
     product.image = request.POST["image"]
     product.save()
 
-    return redirect("/admin/products/" + str(productId))
+    return redirect("/admins/products/" + str(productId))
 
 def adminDelete(request, productId):
     if "curUserId" not in request.session.keys():
@@ -144,7 +144,7 @@ def adminDelete(request, productId):
     delProduct = Product.objects.get(id=productId)
     delProduct.delete()
 
-    return redirect("/admin/products")
+    return redirect("/admins/products")
 
 def logout(request):
     request.session.clear()
