@@ -2,12 +2,6 @@
     padding: 50px;
 }
 
-* {
-	margin: 0px;
-	padding: 0px;
-	border: 1px red dotted;
-}
-
 .nav_logo {
 	height: 25px;
 	width: 25px;
@@ -43,4 +37,19 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
+}
+
+.center_align {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1rem;
+}
+.right_align {
+	margin-left: auto;
+}
+
+.nav_custom {
+	background-color: white;
+	border-bottom: 1px solid gray;
 }

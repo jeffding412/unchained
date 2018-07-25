@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Index Page</title>
+        <title>Unchained</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -11,9 +11,10 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="css/index.css"/>
+        <link rel="icon" href="images/broken_chain.png">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light nav_custom">
             <a class="navbar-brand" href="#">Unchained <img class="nav_logo" src="images/broken_chain.png"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -59,7 +60,7 @@
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="" method="POST">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-light my-2 my-sm-0" style="border-color: gray" type="submit">Search</button>
                 </form>
             </div>
         </nav>
@@ -72,8 +73,8 @@
         </div>
 
         <div class="container">
-            <h3 class="text-center">Recent Items</h3>
-            <div class="row">
+            <h3 class="text-center" style="border-bottom: 1px solid gray">Recent Items</h3>
+            <div class="row center_align">
                 <div class="dropdown show">
                     <a class="btn btn-light dropdown-toggle" style="border-color: gray" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sort by
@@ -85,8 +86,8 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </div>
-                <form class="form-inline" action="" method="POST">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="right_align"  action="" method="POST">
+                    <input class="mr-sm-2" style="border: 1px solid #ced4da; padding: .375rem .75rem; border-radius: .25rem;" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-light my-2 my-sm-0" style="border-color: gray" type="submit">Search</button>
                 </form>
             </div>
@@ -98,7 +99,29 @@
                             <div class="product_text">Product Name</div>
                         </div>
                     </div>
-                    <p class="font-weight-bold">Brand Name</p>
+                    <p class="font-weight-bold" style="margin-bottom: 0">Supreme</p>
+                    <p>$200</p>
+                </div>
+                <div class="col">
+                    <div class="product_container">
+                        <a href="#"><img class="product_image" src="images/nikes.png"></a>
+                        <div class="product_overlay">
+                            <div class="product_text">Product Name</div>
+                        </div>
+                    </div>
+                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
+                    <p>Price</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="product_container">
+                        <a href="#"><img class="product_image" src="images/acronym.png"></a>
+                        <div class="product_overlay">
+                            <div class="product_text">Product Name</div>
+                        </div>
+                    </div>
+                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
                     <p>Price</p>
                 </div>
                 <div class="col">
@@ -108,7 +131,7 @@
                             <div class="product_text">Product Name</div>
                         </div>
                     </div>
-                    <p class="font-weight-bold">Brand Name</p>
+                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
                     <p>Price</p>
                 </div>
             </div>
@@ -120,7 +143,7 @@
                             <div class="product_text">Product Name</div>
                         </div>
                     </div>
-                    <p class="font-weight-bold">Brand Name</p>
+                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
                     <p>Price</p>
                 </div>
                 <div class="col">
@@ -130,29 +153,7 @@
                             <div class="product_text">Product Name</div>
                         </div>
                     </div>
-                    <p class="font-weight-bold">Brand Name</p>
-                    <p>Price</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="product_container">
-                        <a href="#"><img class="product_image" src="images/supreme_fade.png"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold">Brand Name</p>
-                    <p>Price</p>
-                </div>
-                <div class="col">
-                    <div class="product_container">
-                        <a href="#"><img class="product_image" src="images/supreme_fade.png"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold">Brand Name</p>
+                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
                     <p>Price</p>
                 </div>
             </div>

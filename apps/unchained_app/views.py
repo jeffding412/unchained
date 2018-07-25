@@ -50,22 +50,13 @@ def adminProducts(request):
     if "curUserId" not in request.session["curUserId"]:
         return redirect("/")
 
-    context = {
-        "products": Product.objects.all()
-    }
-    
-    return render(request, "/unchained/admin_products.html", context)
+def add_product(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
 
-def adminProductById(request, productId):
-    if "curUserId" not in request.session["curUserId"]:
-        return redirect("/")
-    
-    product = Product.objects.get(id=productId)
-    seller = Seller.objects.get(id=product.seller_id)
+    user = User.objects.get(id=request.session['user_id'])
     context = {
-        "product": product,
-        "seller": seller,
-        "shipping": seller.shippings.first()
+        "user": user
     }
 
     return render(request, "/unchained/admin_product_id.html")
@@ -117,5 +108,5 @@ def adminDelete(request, productId):
 
 def logout(request):
     request.session.clear()
-    redirect("/")
+    return redirect("/")
 
