@@ -73,7 +73,7 @@ def add_product(request):
         "user": user
     }
 
-    return render(request, "unchained_app/admin_product_id.html")
+    return render(request, "unchained_app/add_product.html")
 
 def adminProductById(request, productId):
     if "curUserId" not in request.session.keys():
@@ -149,3 +149,25 @@ def logout(request):
     request.session.clear()
     return redirect("/")
 
+def add_product_to_id(request, id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    request.session['errors'] = Product.objects.validator(request.POST)
+    if len(request.session['errors']):
+        # if the errors object contains anything, loop through each key-value pair and make a flash message
+        for key, value in request.session['errors'].items():
+            messages.error(request, value)
+        # redirect the user back to the form to fix the errors
+        return redirect('/addProduct')
+
+    user = User.objects.get(id=request.session['user_id'])
+    context = {
+        "user": user
+    }    
+
+    Product.objects.create(name=request.POST['name'],brand=request.POST['brand'],category=request.POST['category'],price=float(request.POST['price']),description=request.POST['description'],status="For Sale",seller_id=user)
+
+    print(Product.objects.all().values())
+
+    return redirect('/')

@@ -62,7 +62,7 @@
         </nav>
 
         <div class="container">
-            <form action="/addProduct/{{user.id}}" method="POST">
+            <form action="/addProduct/{{request.session.user_id}}" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
                     <label>Name</label>
