@@ -4,6 +4,7 @@ import re
 import bcrypt
 
 EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
+PRICE_REGEX = re.compile(r"(^[0-9]+\.+\d+\d+$)")
 
 # Create your models here.
 class UserManager(models.Manager):
@@ -25,6 +26,18 @@ class UserManager(models.Manager):
 
         return errors
 
+    def validator_admin(self, postData):
+        errors = {}
+
+        user = User.objects.filter(email=postData["email"])
+        if len(user) == 1 and bcrypt.checkpw(postData['password'].encode(), user[0].password_hash.encode()):
+            if not user[0].isAdmin:
+                errors["adminLogin"] = "You do not have permission to login admin area"
+        else:
+            errors["adminLogin"] = "Incorrect Email or Password"
+            
+        return errors
+
 class User(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -44,6 +57,41 @@ class User(models.Model):
 class ShippingManager(models.Manager):
     def validator(self, postData):
         errors = {}
+
+        if len(postData["first_name"]) < 2:
+            errors["first_name"] = "First name must have 2+ characters"
+        elif not postData["first_name"].isalpha():
+            errors["first_name"] = "Letters only for first name"
+
+        if len(postData["last_name"]) < 2:
+            errors["last_name"] = "Last name must have 2+ characters"
+        elif not postData["last_name"].isalpha():
+            errors["last_name"] = "Letters only for last name"
+        
+        if len(postData["address"].replace(" ", "")) < 8:
+            errors["address"] = "Address must be at least 8 characters long"
+
+        if len(postData["city"]) < 2:
+            errors["city"] = "City name must have 2+ characters"
+        elif not postData["city"].isalpha():
+            errors["city"] = "Letters only for city name"
+
+        if len(postData["state"]) != 2:
+            errors["state"] = "State must be an abbreviation of 2 capital letters"
+        elif not postData["state"].isalpha():
+            errors["state"] = "Letters only for state"
+
+        if len(postData["country"]) < 2:
+            errors["country"] = "Country must have 2+ letters"
+        elif not postData["country"].isalpha():
+            errors["country"] = "Letters only for country"
+
+        testZip = postData["zip"]
+        if len(str(testZip)) != 5:
+            errors["zip"] = "Zip code must have exactly 5 numbers"
+        elif not testZip.isnumeric():
+            errors["zip"] = "Numbers only for zip code"
+
         return errors
 
 class Shipping(models.Model):
@@ -63,6 +111,24 @@ class Shipping(models.Model):
 class ProductManager(models.Manager):
     def validator(self, postData):
         errors = {}
+
+        if len(postData["name"]) < 1:
+            errors["name"] = "Name cannot be blank"
+
+        if len(postData["name"]) < 1:
+            errors["brand"] = "Brand cannot be blank"
+
+        if len(postData["category"]) < 1:
+            errors["cateogry"] = "category cannot be blank"
+        elif not postData["category"].isalpha():
+            errors["category"] = "Letters only for category"
+
+        if not PRICE_REGEX.match(str(postData["price"])):
+            errors["price"] = "Invalid price"
+
+        if len(postData["description"].replace(" ", "")) < 1:
+            errors["description"] = "Description cannot be blank"
+
         return errors
 
 class Product(models.Model):
@@ -81,6 +147,10 @@ class Product(models.Model):
 class ImageManager(models.Manager):
     def validator(self, postData):
         errors = {}
+
+        if len(postData["name"]) < 1:
+            errors["name"] = "Name cannot be blank"
+
         return errors
 
 class Image(models.Model):
@@ -93,6 +163,13 @@ class Image(models.Model):
 class OfferManager(models.Manager):
     def validator(self, postData):
         errors = {}
+
+        if not PRICE_REGEX.match(str(postData["price"])):
+            errors["price"] = "Invalid price"
+
+        if len(postData["message"].replace(" ", "")) < 1:
+            errors["message"] = "Message cannot be blank"
+
         return errors
 
 class Offer(models.Model):

@@ -1,0 +1,13 @@
+#orderInfo, #product {
+    margin: 0px;
+    padding: 20px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#status, #costs {
+    margin: 0px;
+    padding: 20px;
+    display: inline-block;
+    vertical-align: top;
+}
