@@ -17,5 +17,6 @@ urlpatterns = [
     url(r'^messages/(?P<id>\d+)$', views.messages),
     url(r'^settings/(?P<id>\d+)$', views.settings),
     url(r'^updateProfile$', views.update_profile),
-    url(r'^changePassword$', views.change_password)
+    url(r'^changePassword$', views.change_password),
+    url(r'^changeShipping$', views.change_shipping),
 ]

@@ -227,3 +227,16 @@ def change_password(request):
     user.save()
 
     return redirect('/settings/' + str(user.id))
+
+def change_shipping(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+    
+    request.session['errors'] = Shipping.objects.validator(request.POST)
+    if len(request.session['errors']):
+        # redirect the user back to the form to fix the errors
+        return redirect('/settings/' + str(user.id))
+
+    return redirect('/settings/' + str(user.id))
