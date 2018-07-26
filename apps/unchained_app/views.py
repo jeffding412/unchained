@@ -84,7 +84,6 @@ def adminSearch(request):
         seller_name = (product.seller_id.first_name + " " + product.seller_id.last_name).lower()
         if request.POST["sellerName"].lower() in seller_name:
             products.append(product)
-            print(seller_name)
 
     context = {
         "products": products
@@ -147,7 +146,7 @@ def adminProcessEdit(request, productId):
 
     if len(errors) > 0:
         for tag, error in errors.items():
-            messages.error(request, error, extra_tages=tag)
+            messages.error(request, error, extra_tags=tag)
         return redirect("/admins/products/" + str(productId) + "/edit")
 
     product = Product.objects.get(id=productId)

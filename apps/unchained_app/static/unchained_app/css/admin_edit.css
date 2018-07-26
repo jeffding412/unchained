@@ -1,0 +1,19 @@
+.error {
+    color: red;
+}
+
+.editBlock {
+    margin-left: 20px;
+}
+
+form {
+    padding: 20px;
+}
+
+.form-group {
+    width: 400px;
+}
+
+textarea {
+    min-height: 120px;
+}

@@ -5,11 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Product</title>
         {% load static %}
-        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'admin_product_id.css' %}">
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'unchained_app/css/admin_product_id.css' %}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="icon" href="https://vignette.wikia.nocookie.net/immortalpedia/images/4/45/Broken_Chain.png/revision/latest?cb=20160418021259">
     </head>
     <body>
         <div class="container-fluid">
@@ -29,25 +30,29 @@
 
             <div id="productInfo">
                 <h3>Product Info:</h3>
-                <p>Product ID: {{ product.id }}</p>
-                <p>Product name: {{ product.name }}</p>
-                <p>Brand: {{ product.brand }}</p>
-                <p>Category: {{ product.category }}</p>
-                <p>Price: ${{ product.price }}</p>
-                <p>Status: {{ product.status }}</p>
-                <p>Description: </p>
+                <p><b>Product ID:</b> {{ product.id }}</p>
+                <p><b>Product name:</b> {{ product.name }}</p>
+                <p><b>Brand:</b> {{ product.brand }}</p>
+                <p><b>Category:</b> {{ product.category }}</p>
+                <p><b>Price:</b> ${{ product.price }}</p>
+                <p><b>Status:</b> {{ product.status }}</p>
+                <p><b>Description:</b> </p>
                 <p>{{ product.description }}</p>
-            </div><br/>
+            </div>
             <div id="sellerInfo">
                 <h3>Seller Info:</h3>
-                <p>Seller ID: {{ seller.id }}</p>
-                <p>Seller name: {{ seller.first_name }} {{ seller.last_name }}</p><br/>
-                <h3>Shipping Info:</h3>
+                <p><b>Seller ID:</b> {{ seller.id }}</p>
+                <p><b>Seller name:</b> {{ seller.first_name }} {{ seller.last_name }}</p><br/>
+                <h4>Shipping Info:</h4>
                 <p>{{ shipping.first_name }} {{ shipping.last_name }}</p>
                 <p>{{ shipping.address }}</p>
                 <p>{{ shipping.city }}, {{ shipping.state }} {{ shipping.zip }}</p>
                 <p>{{ shipping.country }}</p>
             </div>
+            <div id="editLink">
+                <a href="{% url 'adminEdit' productId=product.id %}">Edit Product</a>
+            </div>
+            
         </div>
     </body>
 </html>

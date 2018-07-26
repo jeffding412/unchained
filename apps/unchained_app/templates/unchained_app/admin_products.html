@@ -5,38 +5,40 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Products</title>
         {% load static %}
-        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'admin_products.css' %}">
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'unchained_app/css/admin_products.css' %}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="icon" href="https://vignette.wikia.nocookie.net/immortalpedia/images/4/45/Broken_Chain.png/revision/latest?cb=20160418021259">
     </head>
 
     <body>
-        <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Unchained</a>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Products<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <div>
+                    <a class="navbar-brand" href="#">Unchained</a>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Products<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+        <div class="container-fluid">
+            
+            <br/>
+            <div id="formBlock">
                 <form id="ajaxForm" action="{% url 'adminSearch' %}" method="post">
                     {% csrf_token %}
                     <input type="text" class="form-control" placeholder="Search product.." name="productName">
                     <input type="text" class="form-control" placeholder="Search seller.." name="sellerName">
                     <select name="categories" class="form-control">
                         <option selected value="">All Categories</option>
-                        <option value="Tops">Top</option>
+                        <option value="Top">Top</option>
                         <option value="Bottoms">Bottoms</option>
                         <option value="Shoes">Shoes</option>
                         <option value="Accessories">Accessories</option>
@@ -45,40 +47,6 @@
             </div><br/>
 
             <div id="placeholder"></div>
-
-            <!-- <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Seller Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for product in products %}
-                        <tr>
-                            <td>{{ product.image }}</td>
-                            <td>{{ product.id }}</td>
-                            <td>{{ product.name }}</td>
-                            <td>{{ product.seller_id.first_name }} {{ product.seller_id.last_name }}</td>
-                            <td>{{ product.category }}</td>
-                            <td>${{ product.price }}</td>
-                            <td>{{ product.status }}</td>
-                            <td>
-                                <a href="{% url 'adminProductId' productId=product.id %}">Show</a> | 
-                                <a href="{% url 'adminEdit' productId=product.id %}">Edit</a> | 
-                                <a href="{% url 'adminDelete' productId=product.id %}">Delete</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div> -->
 
         <script type="text/javascript">
             function getTableFromForm(){

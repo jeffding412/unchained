@@ -19,8 +19,11 @@ body {
     align-content: right;
 }
 
-#productInfo, #sellerInfo {
+#productInfo, #sellerInfo, #editLink {
+    width: 350px;
+    margin: 20px;
     padding: 10px;
     display: inline-block;
     vertical-align: top;
+    border: 1px solid black;
 }
