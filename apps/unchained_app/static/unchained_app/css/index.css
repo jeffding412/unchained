@@ -30,6 +30,7 @@
 
 .product_text {
 	background-color: red;
+	text-decoration: none;
 	color: white;
 	font-size: 20px;
 	position: absolute;
@@ -37,6 +38,12 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
+}
+
+.product_text:hover {
+	text-decoration: none;
+	background-color: black;
+	color: white;
 }
 
 .center_align {
