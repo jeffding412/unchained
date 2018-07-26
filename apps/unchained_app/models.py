@@ -55,7 +55,7 @@ class UserManager(models.Manager):
         elif not re.match(r"^[a-zA-Z]+$", postData['first']):
             errors["last"] = "User last name can only contain letters"
 
-        if len(postData['username']) < 1:
+        if len(postData['username'].replace(" ", "")) < 1:
             errors["username"] = "Username can't be blank"
             
         return errors
