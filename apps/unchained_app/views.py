@@ -340,4 +340,7 @@ def user_messages(request, id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
-    return render(request, "unchained_app/user_messages.html")    
+    return render(request, "unchained_app/user_messages.html")  
+
+def make_offer(request, id):
+    return redirect('/product/'+id)
