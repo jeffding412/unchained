@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Products</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Unchained</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#editModal">Edit</a>
+                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">What do you want to edit?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!-- Form to route to different user functions -->
+                                    <div class="modal-body">
+                                        <a href="/addProduct" class="btn btn-primary">Sell</a>
+                                        <a href="/messages/{{request.session.user_id}}" class="btn btn-primary">Messages</a>
+                                        <a href="#" class="btn btn-primary">My Products</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <h1>My Products</h1>
+            <div class="row">
+                {% for product in products %}
+                    <div class="card col-xs-4" style="width: 18rem;">
+                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{product.name}}</h5>
+                            <p class="card-text">{{product.brand}}</p>
+                            <p class="card-text">${{product.price}}</p>
+                            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#editProductModal">Edit</a>
+                            <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Product</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <!-- Form to route to edit product -->
+                                        <div class="modal-body">
+                                            <form action="/edit/product/{{product.id}}" method="POST">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    {% if request.session.errors.name %}
+                                                        <p class="text-danger">{{request.session.errors.name}}</p>
+                                                    {% endif %} 
+                                                    <input type="text" class="form-control" name="name" value="{{product.name}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Brand</label>
+                                                    {% if request.session.errors.brand %}
+                                                        <p class="text-danger">{{request.session.errors.brand}}</p>
+                                                    {% endif %} 
+                                                    <input type="text" class="form-control" name="brand" value="{{product.brand}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Price</label>
+                                                    {% if request.session.errors.price %}
+                                                        <p class="text-danger">{{request.session.errors.price}}</p>
+                                                    {% endif %} 
+                                                    <input type="text" class="form-control" name="price" value="{{product.price}}">
+                                                    <small class="form-text text-muted">Omit the "$" sign</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Category</label>
+                                                    {% if request.session.errors.category %}
+                                                        <p class="text-danger">{{request.session.errors.category}}</p>
+                                                    {% endif %} 
+                                                    <select class="form-control" name="category">
+                                                        <option>Tops</option>
+                                                        <option>Bottoms</option>
+                                                        <option>Shoes</option>
+                                                        <option>Accessories</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Images</label>
+                                                    <input type="text">
+                                                    <button class="btn btn-outline-success">Upload</button>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Description</label>
+                                                    {% if request.session.errors.description %}
+                                                        <p class="text-danger">{{request.session.errors.description}}</p>
+                                                    {% endif %} 
+                                                    <textarea class="form-control" name="description" rows="3">{{product.description}}</textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

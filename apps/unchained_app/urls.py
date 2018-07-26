@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^updateProfile$', views.update_profile),
     url(r'^changePassword$', views.change_password),
     url(r'^changeShipping$', views.change_shipping),
-    url(r'^myProducts$', views.myProducts)
+    url(r'^myProducts$', views.myProducts),
+    url(r'^edit/product/(?P<id>\d+)$', views.editProduct),
 ]

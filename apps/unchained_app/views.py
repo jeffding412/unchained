@@ -250,9 +250,27 @@ def myProducts(request):
         return redirect('/logout')
 
     user = User.objects.get(id=request.session['user_id'])
+    products = Product.objects.filter(seller_id=user)
 
     context = {
-        'user': user
+        'user': user,
+        'products': products
     }
 
     return render(request, "unchained_app/myProducts.html", context)
+
+def editProduct(request, id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+
+    request.session['errors'] = Product.objects.validator(request.POST)
+    if len(request.session['errors']):
+        # redirect the user back to the form to fix the errors
+        return redirect('/myProducts')
+
+
+    # Product.objects.create(name=request.POST['name'],brand=request.POST['brand'],category=request.POST['category'],price=float(request.POST['price']),description=request.POST['description'],status="For Sale",seller_id=user)
+
+    return redirect('/myProducts')
