@@ -34,7 +34,7 @@
                                     <div class="modal-body">
                                         <a href="/addProduct" class="btn btn-primary">Sell</a>
                                         <a href="/messages/{{request.session.user_id}}" class="btn btn-primary">Messages</a>
-                                        <a href="#" class="btn btn-primary">My Products</a>
+                                        <a href="/settings/{{request.session.user_id}}" class="btn btn-primary">Settings</a>
                                     </div>
                                 </div>
                             </div>
@@ -60,8 +60,8 @@
                             <h5 class="card-title">{{product.name}}</h5>
                             <p class="card-text">{{product.brand}}</p>
                             <p class="card-text">${{product.price}}</p>
-                            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#editProductModal">Edit</a>
-                            <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#editProduct{{product.id}}Modal">Edit</a>
+                            <div class="modal fade" id="editProduct{{product.id}}Modal" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
