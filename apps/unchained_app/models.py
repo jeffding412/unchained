@@ -176,7 +176,7 @@ class ProductManager(models.Manager):
             errors["brand"] = "Brand cannot be blank"
 
         if len(postData["category"]) < 1:
-            errors["cateogry"] = "category cannot be blank"
+            errors["category"] = "category cannot be blank"
         elif not postData["category"].isalpha():
             errors["category"] = "Letters only for category"
 
@@ -196,7 +196,6 @@ class Product(models.Model):
     seller_id = models.ForeignKey(User, related_name="products")
 
     objects = ProductManager()
-
 
 class ImageManager(models.Manager):
     def validator(self, postData):

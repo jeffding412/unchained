@@ -296,14 +296,27 @@ def editProduct(request, id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
-    user = User.objects.get(id=request.session['user_id'])
-
     request.session['errors'] = Product.objects.validator(request.POST)
     if len(request.session['errors']):
         # redirect the user back to the form to fix the errors
         return redirect('/myProducts')
 
+    product = Product.objects.get(id=id)
+    product.name = request.POST['name']
+    product.brand = request.POST['brand']
+    product.category = request.POST['category']
+    product.price = float(request.POST['price'])
+    product.description = request.POST['description']
+    product.save()
 
-    # Product.objects.create(name=request.POST['name'],brand=request.POST['brand'],category=request.POST['category'],price=float(request.POST['price']),description=request.POST['description'],status="For Sale",seller_id=user)
+    return redirect('/myProducts')
+
+def soldProduct(request, id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    product = Product.objects.get(id=id)
+    product.status = "Sold"
+    product.save()
 
     return redirect('/myProducts')
