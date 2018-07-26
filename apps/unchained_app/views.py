@@ -162,7 +162,7 @@ def add_product_to_id(request, id):
 
     return redirect('/')
 
-def messages(request, id):
+def myMessages(request, id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
@@ -244,3 +244,15 @@ def change_shipping(request):
     shipping.save()
 
     return redirect('/settings/' + str(user.id))
+
+def myProducts(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+
+    context = {
+        'user': user
+    }
+
+    return render(request, "unchained_app/myProducts.html", context)
