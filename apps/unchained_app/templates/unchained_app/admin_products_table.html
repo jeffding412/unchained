@@ -1,0 +1,32 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Seller Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.image }}</td>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.seller_id.first_name }} {{ product.seller_id.last_name }}</td>
+                <td>{{ product.category }}</td>
+                <td>${{ product.price }}</td>
+                <td>{{ product.status }}</td>
+                <td>
+                    <a href="{% url 'adminProductId' productId=product.id %}">Show</a> | 
+                    <a href="{% url 'adminEdit' productId=product.id %}">Edit</a> | 
+                    <a href="{% url 'adminDelete' productId=product.id %}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
