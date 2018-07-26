@@ -12,9 +12,6 @@ def login_or_register(request):
     user = User.objects.filter(email=request.POST['email'])
     request.session['errors'] = User.objects.validator(request.POST)
     if len(request.session['errors']):
-        # if the errors object contains anything, loop through each key-value pair and make a flash message
-        for key, value in request.session['errors'].items():
-            messages.error(request, value)
         # redirect the user back to the form to fix the errors
         return redirect('/')
 

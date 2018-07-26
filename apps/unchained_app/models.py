@@ -19,9 +19,7 @@ class UserManager(models.Manager):
             errors["password"] = "Password should be at least 8 characters"
 
         user = User.objects.filter(email=postData['email'])
-        if not user:
-            errors['failure'] = "No email/password combo"
-        elif not bcrypt.checkpw(postData['password'].encode(), user[0].password_hash.encode()):
+        if user and not bcrypt.checkpw(postData['password'].encode(), user[0].password_hash.encode()):
             errors['failure'] = "No email/password combo"
 
         return errors
