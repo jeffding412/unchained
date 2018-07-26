@@ -101,10 +101,82 @@
 <div class="row">
     <div class="col">
         <div class="container">
-        	<h1>Product Name</h1>
-        	<p>Price: price</p>
-        	<p>LOREM IPSUM GENERATOR Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        	<h1>{{product.name}}</h1>
+            <p>Price: ${{product.price}}</p>
+            <p>{{product.description}}</p>
         <!-- Place a modal for offer here -->
+        {% if product.seller_id == user %}
+            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#editProduct{{product.id}}Modal">Edit</a>
+            <div class="modal fade" id="editProduct{{product.id}}Modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <!-- Form to route to edit product -->
+                        <div class="modal-body">
+                            <form action="/edit/product/{{product.id}}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    {% if request.session.errors.name %}
+                                        <p class="text-danger">{{request.session.errors.name}}</p>
+                                    {% endif %} 
+                                    <input type="text" class="form-control" name="name" value="{{product.name}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Brand</label>
+                                    {% if request.session.errors.brand %}
+                                        <p class="text-danger">{{request.session.errors.brand}}</p>
+                                    {% endif %} 
+                                    <input type="text" class="form-control" name="brand" value="{{product.brand}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    {% if request.session.errors.price %}
+                                        <p class="text-danger">{{request.session.errors.price}}</p>
+                                    {% endif %} 
+                                    <input type="text" class="form-control" name="price" value="{{product.price}}">
+                                    <small class="form-text text-muted">Omit the "$" sign</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    {% if request.session.errors.category %}
+                                        <p class="text-danger">{{request.session.errors.category}}</p>
+                                    {% endif %} 
+                                    <select class="form-control" name="category">
+                                        <option>Tops</option>
+                                        <option>Bottoms</option>
+                                        <option>Shoes</option>
+                                        <option>Accessories</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Images</label>
+                                    <input type="text">
+                                    <button class="btn btn-outline-success">Upload</button>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    {% if request.session.errors.description %}
+                                        <p class="text-danger">{{request.session.errors.description}}</p>
+                                    {% endif %} 
+                                    <textarea class="form-control" name="description" rows="3">{{product.description}}</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a href="/sold/{{product.id}}" class="btn btn-success">Sold</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <button type="button" class="btn btn-light" style="border-color: gray">Make an offer</button>
+        {% endif %}
+        <!-- remove this later-->
         <button type="button" class="btn btn-light" style="border-color: gray">Make an offer</button>
         </div>
     </div>
@@ -114,8 +186,12 @@
         <div class="container">
         {% load static %}
             <img class="user_icon" src="{% static 'unchained_app/images/default_icon.png' %}">
-            <h4 class="d-inline-block">Seller's Username</h4>
-            <p>Rating: <span class="font-weight-bold">#/5</span></p>
+            <h4 class="d-inline-block">{{user.username}}</h4>
+            {% if rating != -1 %}
+                <p>Rating: <span class="font-weight-bold">{{user.rating}}/5</span></p>
+            {% else %}
+                <p>Rating: <span class="font-weight-bold">N/A</span></p>
+            {% endif %}
         </div>
     </div>
 </div>
