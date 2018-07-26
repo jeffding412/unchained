@@ -319,3 +319,9 @@ def soldProduct(request, id):
 
 def product_page(request, id):
     return render(request, 'unchained_app/product_page.html')
+
+def user_messages(request, id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    return render(request, "unchained_app/user_messages.html")    
