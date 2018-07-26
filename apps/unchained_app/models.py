@@ -234,3 +234,19 @@ class Offer(models.Model):
 
     objects = OfferManager()
 
+class ReplyManager(models.Manager):
+    def validator(self, postData):
+        errors = {}
+
+        if len(postData['reply'].replace(" ", "")) < 1:
+            error['reply'] = "Reply cannot be blank"
+
+        return errors
+
+class Reply(models.Model):
+    message = models.TextField()
+    offer = models.ForeignKey(Offer, related_name="replies")
+    user_id = models.ForeignKey(User, related_name="replier")
+    
+    objects = ReplyManager()
+

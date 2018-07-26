@@ -91,7 +91,7 @@
                             {% endif %} 
                             <input type="text" class="form-control" name="email" value="{{user.email}}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </form>
                 </div>
                 <div class="col">
@@ -109,7 +109,7 @@
                         {% if request.session.errors.failure %}
                             <p class="text-danger">{{request.session.errors.failure}}</p>
                         {% endif %} 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </form>
                 </div>
             </div>
@@ -170,7 +170,7 @@
                         <input type="text" class="form-control" name="zip" value="{{shipping.zipcode}}">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </body>
