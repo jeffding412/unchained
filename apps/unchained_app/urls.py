@@ -10,6 +10,8 @@ urlpatterns = [
     url(r'^admins/products/(?P<productId>\d+)/edit$', views.adminEdit, name="adminEdit"),
     url(r'^admins/products/(?P<productId>\d+)/processEdit$', views.adminProcessEdit, name="adminProcessEdit"),
     url(r'^admins/products/(?P<productId>\d+)/delete$', views.adminDelete, name="adminDelete"),
+    url(r'^admins/allProducts$', views.adminAllProducts, name="adminAllProducts"),
+    url(r'^admins/search$', views.adminSearch, name="adminSearch"),
     url(r'^loginOrRegister$', views.login_or_register),
     url(r'^logout$', views.logout, name="logout"),
     url(r'^addProduct$', views.add_product),
@@ -18,5 +20,5 @@ urlpatterns = [
     url(r'^settings/(?P<id>\d+)$', views.settings),
     url(r'^updateProfile$', views.update_profile),
     url(r'^changePassword$', views.change_password),
-    url(r'^changeShipping$', views.change_shipping)
+    url(r'^changeShipping$', views.change_shipping),
 ]

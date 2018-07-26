@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 import bcrypt
 from .models import User, Shipping, Product, Image, Offer
 
@@ -61,6 +62,38 @@ def adminProducts(request):
     }
 
     return render(request, "unchained_app/admin_products.html", context)
+
+@csrf_exempt
+def adminAllProducts(request):
+    if request.method != "POST":
+        return redirect("/")
+
+    products = Product.objects.all()
+
+    context = {
+        "products": Product.objects.all()
+    }
+
+    return render(request, "unchained_app/admin_products_table.html", context)
+
+def adminSearch(request):
+    if request.method != "POST":
+        return redirect("/")
+
+    tempProds = Product.objects.filter(name__icontains=request.POST["productName"]).filter(category__contains=request.POST["categories"])
+    products = []
+
+    for product in tempProds:
+        seller_name = (product.seller_id.first_name + " " + product.seller_id.last_name).lower()
+        if request.POST["sellerName"].lower() in seller_name:
+            products.append(product)
+            print(seller_name)
+
+    context = {
+        "products": products
+    }
+
+    return render(request, "unchained_app/admin_products_table.html", context)
 
 def add_product(request):
     if not "user_id" in request.session:

@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Products</title>
         {% load static %}
-        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/admin_products.css' %}">
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'admin_products.css' %}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -16,7 +16,7 @@
     <body>
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="{% url 'adminProducts' %}">Unchained</a>
+                <a class="navbar-brand" href="#">Unchained</a>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
@@ -29,14 +29,24 @@
                 </div>
             </nav>
 
-            <div class="search-container">
-                <form action="/" method="post">
-                    <input type="text" placeholder="Search.." name="search">
-                    <input type="submit" value="Search">
+            <div>
+                <form id="ajaxForm" action="{% url 'adminSearch' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" class="form-control" placeholder="Search product.." name="productName">
+                    <input type="text" class="form-control" placeholder="Search seller.." name="sellerName">
+                    <select name="categories" class="form-control">
+                        <option selected value="">All Categories</option>
+                        <option value="Tops">Top</option>
+                        <option value="Bottoms">Bottoms</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Accessories">Accessories</option>
+                    </select>
                 </form>
-            </div>
+            </div><br/>
 
-            <table class="table table-bordered table-striped">
+            <div id="placeholder"></div>
+
+            <!-- <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Image</th>
@@ -68,6 +78,40 @@
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
+        </div> -->
+
+        <script type="text/javascript">
+            function getTableFromForm(){
+                $.ajax({
+                    url: '/admins/search', 
+                    method: "post",
+                    data: $("#ajaxForm").serialize(),
+                    success: function(response) {
+                        $("#placeholder").html(response);
+                        // console.log(response)
+                    }
+                })
+            }
+            $(document).ready(function() {
+                $.ajax({
+                    url: '/admins/allProducts', 
+                    method: "post",
+                    data: $("#ajaxForm").serialize(),
+                    success: function(response) {
+                        $("#placeholder").html(response);
+                        // console.log(response)
+                    }
+                })
+            })
+            $("input[name=productName]").keyup(function() {
+                getTableFromForm();
+            })
+            $("input[name=sellerName]").keyup(function() {
+                getTableFromForm();
+            })
+            $("select[name=categories]").change( function() {
+                getTableFromForm();
+            })
+        </script>
     </body>
 </html>
