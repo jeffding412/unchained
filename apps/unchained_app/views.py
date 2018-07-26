@@ -343,4 +343,17 @@ def user_messages(request, id):
     return render(request, "unchained_app/user_messages.html")  
 
 def make_offer(request, id):
-    return redirect('/product/'+id)
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    request.session['errors'] = Offer.objects.validator(request.POST)
+    if len(request.session['errors']):
+        # redirect the user back to the form to fix the errors
+        return redirect('/product/'+id)
+
+    product = Product.objects.get(id=id)
+    user = User.objects.get(id=request.session['user_id'])
+
+    Offer.objects.create(price=request.POST['price'],message=request.POST['message'],product_id=product,user_id=user)
+
+    return redirect('/messages/'+str(request.session['user_id']))

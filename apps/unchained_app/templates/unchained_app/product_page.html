@@ -204,9 +204,6 @@
                 </div>
             </div>
         {% else %}
-            <button type="button" class="btn btn-light" style="border-color: gray">Make an offer</button>
-        {% endif %}
-        <!-- remove this later-->
             <a class="btn btn-light" href="#" data-toggle="modal" data-target="#makeOfferModal" style="border-color: gray">Make an offer</a>
             <div class="modal fade" id="makeOfferModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -217,7 +214,7 @@
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <!-- Form to route to edit product -->
+                        <!-- Form to route to make offer -->
                         <div class="modal-body">
                             <form action="/offer/product/{{product.id}}" method="POST">
                                 {% csrf_token %}
@@ -242,6 +239,7 @@
                     </div>
                 </div>
             </div>
+        {% endif %}
         </div>
     </div>
 </div>
