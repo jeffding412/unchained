@@ -4,7 +4,7 @@ import re
 import bcrypt
 
 EMAIL_REGEX = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
-PRICE_REGEX = re.compile(r"(^\d+(.\d{1,2})?$)")
+PRICE_REGEX = re.compile(r"^\d+$")
 
 # Create your models here.
 class UserManager(models.Manager):
@@ -187,7 +187,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     brand = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
-    price = models.FloatField()
+    price = models.IntegerField()
     description = models.TextField()
     status = models.CharField(max_length=255)
 
@@ -224,7 +224,7 @@ class OfferManager(models.Manager):
         return errors
 
 class Offer(models.Model):
-    price = models.FloatField()
+    price = models.IntegerField()
     product_id = models.ForeignKey(Product, related_name="offers")
     user_id = models.ForeignKey(User, related_name="offers")
     message = models.TextField()

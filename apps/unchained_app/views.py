@@ -188,7 +188,7 @@ def add_product_to_id(request, id):
 
     user = User.objects.get(id=request.session['user_id'])
 
-    Product.objects.create(name=request.POST['name'],brand=request.POST['brand'],category=request.POST['category'],price=float(request.POST['price']),description=request.POST['description'],status="For Sale",seller_id=user)
+    Product.objects.create(name=request.POST['name'],brand=request.POST['brand'],category=request.POST['category'],price=int(request.POST['price']),description=request.POST['description'],status="For Sale",seller_id=user)
 
     return redirect('/')
 
@@ -302,7 +302,7 @@ def editProduct(request, id):
     product.name = request.POST['name']
     product.brand = request.POST['brand']
     product.category = request.POST['category']
-    product.price = float(request.POST['price'])
+    product.price = int(request.POST['price'])
     product.description = request.POST['description']
     product.save()
 
