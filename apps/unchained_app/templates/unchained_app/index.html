@@ -11,11 +11,13 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-        <link rel="icon" href="https://vignette.wikia.nocookie.net/immortalpedia/images/4/45/Broken_Chain.png/revision/latest?cb=20160418021259">
+        {% load static %}
+        <link rel="icon" href="{% static 'unchained_app/images/broken_chain.png' %}">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light nav_custom">
-            <a class="navbar-brand" href="#">Unchained <img class="nav_logo" src="https://vignette.wikia.nocookie.net/immortalpedia/images/4/45/Broken_Chain.png/revision/latest?cb=20160418021259"></a>
+            {% load static %}
+            <a class="navbar-brand" href="#">Unchained <img class="nav_logo" src="{% static 'unchained_app/images/broken_chain.png' %}"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -100,7 +102,8 @@
             <div class="row">
                 <div class="col">
                     <div class="product_container">
-                        <a href="#"><img class="product_image" src="https://assets.supremenewyork.com/144187/zo/RQeRo79qj7A1.jpg"></a>
+                        {% load static %}
+                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/ysl1.png' %}"></a>
                         <div class="product_overlay">
                             <div class="product_text">Product Name</div>
                         </div>
@@ -110,7 +113,8 @@
                 </div>
                 <div class="col">
                     <div class="product_container">
-                        <a href="#"><img class="product_image" src="https://process.fs.grailed.com/AJdAgnqCST4iPtnUxiGtTz/cache=expiry:max/rotate=deg:exif/resize=height:880,fit:scale/output=format:jpg,quality:70/compress/WwTTU217QwC4XSqPx1OP"></a>
+                        {% load static %}
+                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/palace.png' %}"></a>
                         <div class="product_overlay">
                             <div class="product_text">Product Name</div>
                         </div>
@@ -122,7 +126,8 @@
             <div class="row">
                 <div class="col">
                     <div class="product_container">
-                        <a href="#"><img class="product_image" src="https://process.fs.grailed.com/AJdAgnqCST4iPtnUxiGtTz/cache=expiry:max/rotate=deg:exif/resize=height:880,fit:scale/output=format:jpg,quality:70/compress/2LuLJQAqTOC7uYreudYo"></a>
+                        {% load static %}
+                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/acronym.png' %}"></a>
                         <div class="product_overlay">
                             <div class="product_text">Product Name</div>
                         </div>
@@ -132,7 +137,8 @@
                 </div>
                 <div class="col">
                     <div class="product_container">
-                        <a href="#"><img class="product_image" src="https://process.fs.grailed.com/AJdAgnqCST4iPtnUxiGtTz/cache=expiry:max/rotate=deg:exif/resize=height:880,fit:scale/output=format:jpg,quality:70/compress/2LuLJQAqTOC7uYreudYo"></a>
+                        {% load static %}
+                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/nikes.png' %}"></a>
                         <div class="product_overlay">
                             <div class="product_text">Product Name</div>
                         </div>
@@ -144,7 +150,8 @@
             <div class="row">
                 <div class="col">
                     <div class="product_container">
-                        <a href="#"><img class="product_image" src="https://process.fs.grailed.com/AJdAgnqCST4iPtnUxiGtTz/cache=expiry:max/rotate=deg:exif/resize=height:880,fit:scale/output=format:jpg,quality:70/compress/hpFGDYkHT4ThHmwyHXaq"></a>
+                        {% load static %}
+                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/supreme_fade.png' %}"></a>
                         <div class="product_overlay">
                             <div class="product_text">Product Name</div>
                         </div>
@@ -154,7 +161,8 @@
                 </div>
                 <div class="col">
                     <div class="product_container">
-                        <a href="#"><img class="product_image" src="https://cdn.runrepeat.com/i/adidas/25179/adidas-originals-stan-smith-boost-mens-running-trainers-sneakers-uk-7-us-7-5-eu-40-2-3-white-white-green-bb0008-men-s-white-white-green-bb0008-a1b6-600.jpg"></a>
+                        {% load static %}
+                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/revenge.png' %}"></a>
                         <div class="product_overlay">
                             <div class="product_text">Product Name</div>
                         </div>

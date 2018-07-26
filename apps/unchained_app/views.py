@@ -320,3 +320,6 @@ def soldProduct(request, id):
     product.save()
 
     return redirect('/myProducts')
+
+def product_page(request, id):
+    return render(request, 'unchained_app/product_page.html')

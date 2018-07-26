@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Product name</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'unchained_app/css/product_page.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+        {% load static %}
+        <link rel="icon" href="{% static 'unchained_app/images/broken_chain.png' %}">
+    </head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light nav_custom">
+            {% load static %}
+            <a class="navbar-brand" href="#">Unchained <img class="nav_logo" src="{% static 'unchained_app/images/broken_chain.png' %}"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sell</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Login/Register</a>
+                        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Login or Register</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!-- Form to send information to login or register user -->
+                                    <div class="modal-body">
+                                        <form action="/loginOrRegister" method="POST">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label>Email address</label>
+                                                <input type="text" class="form-control" placeholder="Enter email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" placeholder="Password">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+<div class="container mt-3">
+	<div class="row">
+        <div class="col">
+	       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      {% load static %}  
+      <img class="d-block w-100" src="{% static 'unchained_app/images/ysl1.png' %}" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      {% load static %}
+      <img class="d-block w-100" src="{% static 'unchained_app/images/ysl2.png' %}" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+        {% load static %}
+      <img class="d-block w-100" src="{% static 'unchained_app/images/ysl3.png' %}" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+        </div>
+	</div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="container">
+        	<h1>Product Name</h1>
+        	<p>Price: price</p>
+        	<p>LOREM IPSUM GENERATOR Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <!-- Place a modal for offer here -->
+        <button type="button" class="btn btn-light" style="border-color: gray">Make an offer</button>
+        </div>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col">
+        <div class="container">
+        {% load static %}
+            <img class="user_icon" src="{% static 'unchained_app/images/default_icon.png' %}">
+            <h4 class="d-inline-block">Seller's Username</h4>
+            <p>Rating: <span class="font-weight-bold">#/5</span></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
