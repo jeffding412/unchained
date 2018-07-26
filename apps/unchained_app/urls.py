@@ -16,9 +16,10 @@ urlpatterns = [
     url(r'^logout$', views.logout, name="logout"),
     url(r'^addProduct$', views.add_product),
     url(r'^addProduct/(?P<id>\d+)$', views.add_product_to_id),
-    url(r'^messages/(?P<id>\d+)$', views.messages),
+    url(r'^messages/(?P<id>\d+)$', views.myMessages),
     url(r'^settings/(?P<id>\d+)$', views.settings),
     url(r'^updateProfile$', views.update_profile),
     url(r'^changePassword$', views.change_password),
     url(r'^changeShipping$', views.change_shipping),
+    url(r'^myProducts$', views.myProducts)
 ]

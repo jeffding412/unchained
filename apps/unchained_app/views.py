@@ -186,9 +186,6 @@ def add_product_to_id(request, id):
 
     request.session['errors'] = Product.objects.validator(request.POST)
     if len(request.session['errors']):
-        # if the errors object contains anything, loop through each key-value pair and make a flash message
-        for key, value in request.session['errors'].items():
-            messages.error(request, value)
         # redirect the user back to the form to fix the errors
         return redirect('/addProduct')
 
@@ -198,7 +195,7 @@ def add_product_to_id(request, id):
 
     return redirect('/')
 
-def messages(request, id):
+def myMessages(request, id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
@@ -269,4 +266,26 @@ def change_shipping(request):
         # redirect the user back to the form to fix the errors
         return redirect('/settings/' + str(user.id))
 
+    shipping = Shipping.objects.get(user_id=user.id)
+    shipping.first_name = request.POST['first_name']
+    shipping.last_name = request.POST['last_name']
+    shipping.address = request.POST['address']
+    shipping.city = request.POST['city']
+    shipping.state = request.POST['state']
+    shipping.country = request.POST['country']
+    shipping.zipcode = request.POST['zip']
+    shipping.save()
+
     return redirect('/settings/' + str(user.id))
+
+def myProducts(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+
+    context = {
+        'user': user
+    }
+
+    return render(request, "unchained_app/myProducts.html", context)
