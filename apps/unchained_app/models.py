@@ -33,7 +33,8 @@ class UserManager(models.Manager):
         if len(user) == 1 and bcrypt.checkpw(postData['password'].encode(), user[0].password_hash.encode()):
             if not user[0].isAdmin:
                 errors["adminLogin"] = "You do not have permission to login admin area"
-        else:
+
+        elif len(user) == 0 or not bcrypt.checkpw(postData['password'].encode(), user[0].password_hash.encode()):
             errors["adminLogin"] = "Incorrect Email or Password"
             
         return errors

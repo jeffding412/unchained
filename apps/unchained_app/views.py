@@ -29,9 +29,6 @@ def login_or_register(request):
 
 def adminLoginForm(request):
     if "curUserId" in request.session.keys():
-        if "curUserId" not in request.session.keys():
-            return redirect("/")
-
         if User.objects.get(id=request.session["curUserId"]).isAdmin:
             return redirect("/admins/products")
         return redirect("/products")
@@ -46,7 +43,7 @@ def adminLogin(request):
 
     if len(errors) > 0:
         for tag, error in errors.items():
-            messages.error(request, error, tag)
+            messages.error(request, error, extra_tags=tag)
         return redirect("/admins")
 
     request.session["curUserId"] = User.objects.get(email=request.POST["email"]).id
