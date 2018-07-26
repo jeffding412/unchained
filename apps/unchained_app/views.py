@@ -318,10 +318,29 @@ def soldProduct(request, id):
     return redirect('/myProducts')
 
 def product_page(request, id):
-    return render(request, 'unchained_app/product_page.html')
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    product = Product.objects.get(id=id)
+    user = User.objects.get(id=request.session['user_id'])
+    if user.num_sold != 0:
+        average = user.rating/user.num_sold
+    else:
+        average = -1
+
+    context = {
+        "product": product,
+        "user": user,
+        "rating": average
+    }
+
+    return render(request, 'unchained_app/product_page.html', context)
 
 def user_messages(request, id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
-    return render(request, "unchained_app/user_messages.html")    
+    return render(request, "unchained_app/user_messages.html")  
+
+def make_offer(request, id):
+    return redirect('/product/'+id)
