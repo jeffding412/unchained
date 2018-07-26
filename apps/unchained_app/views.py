@@ -239,4 +239,14 @@ def change_shipping(request):
         # redirect the user back to the form to fix the errors
         return redirect('/settings/' + str(user.id))
 
+    shipping = Shipping.objects.get(user_id=user.id)
+    shipping.first_name = request.POST['first_name']
+    shipping.last_name = request.POST['last_name']
+    shipping.address = request.POST['address']
+    shipping.city = request.POST['city']
+    shipping.state = request.POST['state']
+    shipping.country = request.POST['country']
+    shipping.zipcode = request.POST['zip']
+    shipping.save()
+
     return redirect('/settings/' + str(user.id))
