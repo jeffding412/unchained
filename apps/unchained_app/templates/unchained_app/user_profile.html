@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Unchained</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-        {% load static %}
-        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'unchained_app/css/index.css' %}">
-        {% load static %}
-        <link rel="icon" href="{% static 'unchained_app/images/broken_chain.png' %}">
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light nav_custom">
+<head>
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>User's profile</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'unchained_app/css/index.css' %}">
+    {% load static %}
+    <link rel="icon" href="{% static 'unchained_app/images/broken_chain.png' %}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light nav_custom">
             {% load static %}
             <a class="navbar-brand" href="/">Unchained <img class="nav_logo" src="{% static 'unchained_app/images/broken_chain.png' %}"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,112 +131,9 @@
             </div>
         </nav>
         <div class="container text-center header">
-            <h1>Un·chained</h1>
-            <h4>/ˌənˈCHānˌDUH/</h4>
-            <i>adjective</i>
-            <p class="text-secondary">present tense: unchain; past participle: unchained</p>
-            <p>To be set free.</p>
+            <h4>Username</h4>
+            <i>"You can call me ugly, but you can't call me broke" - Gucci Mane</i>
+            <p>Rating: #/5</p>
         </div>
-
-        <div class="container">
-            <h3 class="text-center" style="border-bottom: 1px solid gray">Recent Items</h3>
-            <div class="row center_align">
-                <div class="dropdown show">
-                    <a class="btn btn-light dropdown-toggle" style="border-color: gray" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort by
-                    </a>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-                <form class="right_align"  action="" method="POST">
-                    <input class="mr-sm-2" style="border: 1px solid #ced4da; padding: .375rem .75rem; border-radius: .25rem;" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-light my-2 my-sm-0" style="border-color: gray" type="submit">Search</button>
-                </form>
-            </div>
-            <div class="row">
-                {% for product in products %}
-                <div class="col-6">
-                    <div class="product_container">
-                        <a href="/product/{{product.id}}"><img class="product_image" src="{% static '' %}{{product.images.all.0.name}}"></a>
-                        <div class="product_overlay">
-                            <a href="/product/{{product.id}}" class="product_text">{{product.name}}</a>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">{{product.brand}}</p>
-                    <p>${{product.price}}</p>
-                </div>
-                {% endfor %}
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="/product/{{product.id}}"><img class="product_image" src="{% static 'unchained_app/images/ysl1.png' %}"></a>
-                        <div class="product_overlay">
-                            <a href="/product/{{product.id}}" class="product_text">Product Name</a>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Supreme</p>
-                    <p>$200</p>
-                </div>
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/palace.png' %}"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
-                    <p>Price</p>
-                </div>
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/acronym.png' %}"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
-                    <p>Price</p>
-                </div>
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/nikes.png' %}"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
-                    <p>Price</p>
-                </div>
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/supreme_fade.png' %}"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
-                    <p>Price</p>
-                </div>
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/revenge.png' %}"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
-                    <p>Price</p>
-                </div>
-            </div>
-        </div>
-    </body>
+</body>
 </html>
