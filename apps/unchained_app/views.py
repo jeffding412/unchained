@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 import bcrypt
-from .models import User, Shipping, Product, Image, Offer
+from .models import User, Shipping, Product, Image, Offer, Reply
 
 # Create your views here.
 def index(request):
@@ -361,3 +361,32 @@ def make_offer(request, id):
     Offer.objects.create(price=request.POST['price'],message=request.POST['message'],product_id=product,user_id=user,seller=product.seller_id)
 
     return redirect('/messages/'+str(request.session['user_id']))
+
+def all_messages(request, id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    offer = Offer.objects.get(id=id)
+    messages = Reply.objects.filter(offer=offer)
+
+    context = {
+        'messages': messages,
+        'offer': offer
+    }
+
+    return render(request, "unchained_app/user_messages_reply.html", context)
+
+def reply(request, id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    request.session['errors'] = Reply.objects.validator(request.POST)
+    if len(request.session['errors']):
+        # redirect the user back to the form to fix the errors
+        return redirect('/view/messages/'+id)
+
+    offer = Offer.objects.get(id=id)
+    user = User.objects.get(id=request.session['user_id'])
+    # Reply.objects.create('')
+
+    return redirect('/view/messages/'+id)

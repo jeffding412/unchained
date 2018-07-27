@@ -237,7 +237,7 @@ class ReplyManager(models.Manager):
         errors = {}
 
         if len(postData['reply'].replace(" ", "")) < 1:
-            error['reply'] = "Reply cannot be blank"
+            errors['reply'] = "Reply cannot be blank"
 
         return errors
 

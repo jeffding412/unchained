@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^product/(?P<id>\d+)$', views.product_page),
     url(r'^offer/product/(?P<id>\d+)$', views.make_offer),
     url(r'^view/messages/(?P<id>\d+)$', views.all_messages),
+    url(r'^reply/(?P<id>\d+)$', views.reply),
 ]

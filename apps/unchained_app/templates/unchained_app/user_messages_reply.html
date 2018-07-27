@@ -133,6 +133,12 @@
         <div class="row mt-2">
             <div class="col">
                 <div class="container">
+                    {% for message in messages %}
+                        <div class="container">
+                            <a href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
+                            <p>Yo, let me cop</p>
+                        </div>
+                    {% endfor %}
                     <div class="container">
                         <a href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
                         <p>Yo, let me cop</p>
@@ -158,9 +164,16 @@
         <div class="row mt-2">
             <div class="col">
                 <div class="container">
-                    <form>
-                        <textarea></textarea>
-                        <button>Reply</button>
+                    <form action="/reply/{{offer.id}}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Reply</label>
+                            {% if request.session.errors.reply %}
+                                <p class="text-danger">{{request.session.errors.reply}}</p>
+                            {% endif %} 
+                            <textarea class="form-control" name="reply" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Reply</button>
                     </form>
                 </div>
             </div>
