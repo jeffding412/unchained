@@ -462,5 +462,32 @@ def reply(request, id):
 
     return redirect('/view/messages/'+id)
 
-def user_profile(request, id):
-    return render(request, 'unchained_app/user_profile.html')
+def user_profile(request,id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=id)
+    products = Product.objects.filter(seller_id=user)
+
+    if user.num_sold != 0:
+        average = user.rating/user.num_sold
+    else:
+        average = -1
+
+    context = {
+        'user': user,
+        'average': average,
+        'products': products
+    }
+    return render(request, 'unchained_app/user_profile.html', context)
+
+def rate(request,id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=id)
+    user.num_sold += 1
+    user.rating += int(request.POST['rating'])
+    user.save()
+    
+    return redirect('/profile/'+id)

@@ -132,9 +132,51 @@
         </nav>
         <!-- ----------------------Profile Area----------------------- -->
         <div class="container text-center header">
-            <h4>Username</h4>
+            {% if user.username %}
+                <h4>{{user.username}}</h4>
+            {% else %}
+                <h4>{{user.email}}</h4>
+            {% endif %}
             <i>"You can call me ugly, but you can't call me broke" - Gucci Mane</i>
-            <p>Rating: #/5</p>
+            {% if average == -1 %}
+                <p>Rating: N/A</p>
+            {% else %}
+                <p>Rating: {{average}}/5</p>
+            {% endif %}
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ratingModal">
+                Rate User
+            </button>
+                
+            <!-- Modal -->
+            <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Give this man a rating!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/rate/{{user.id}}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <select class="form-control" name="rating">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <hr>
+                                <button type="submit" class="btn btn-primary">Rate</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- ----------------------Profile's products Area----------------------- -->
          <div class="container">
