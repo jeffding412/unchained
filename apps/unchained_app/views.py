@@ -392,5 +392,20 @@ def reply(request, id):
     return redirect('/view/messages/'+id)
 
 def user_profile(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
 
-    return render(request, 'unchained_app/user_profile.html')
+    user = User.objects.get(id=request.session['user_id'])
+    products = Product.objects.filter(seller_id=user)
+
+    if user.num_sold != 0:
+        average = user.rating/user.num_sold
+    else:
+        average = -1
+
+    context = {
+        'user': user,
+        'average': average,
+        'products': products
+    }
+    return render(request, 'unchained_app/user_profile.html', context)

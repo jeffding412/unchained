@@ -132,9 +132,17 @@
         </nav>
         <!-- ----------------------Profile Area----------------------- -->
         <div class="container text-center header">
-            <h4>Username</h4>
+            {% if user.username %}
+                <h4>{{user.username}}</h4>
+            {% else %}
+                <h4>{{user.email}}</h4>
+            {% endif %}
             <i>"You can call me ugly, but you can't call me broke" - Gucci Mane</i>
-            <p>Rating: #/5</p>
+            {% if average == -1 %}
+                <p>Rating: N/A</p>
+            {% else %}
+                <p>Rating: {{average}}/5</p>
+            {% endif %}
         </div>
         <!-- ----------------------Profile's products Area----------------------- -->
          <div class="container">
