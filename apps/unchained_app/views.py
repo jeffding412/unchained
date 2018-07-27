@@ -335,11 +335,13 @@ def user_messages(request, id):
     user = User.objects.get(id=request.session['user_id'])
 
     buy_offers = Offer.objects.filter(user_id=user)
-    print(Offer.objects.all().values())
-    # sell_offers = Offer.objects.filter(product_id.seller_id=user)
+    sell_offers = Offer.objects.filter(seller_id=user)
+    for offer in sell_offers:
+        print(offer.user_id.username)
 
     context = {
-        'buy_offers': buy_offers
+        'buy_offers': buy_offers,
+        'sell_offers': sell_offers
     }
 
     return render(request, "unchained_app/user_messages.html", context)  
