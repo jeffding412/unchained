@@ -155,9 +155,9 @@
                         <div class="card container mt-2" style="width: 18rem;">
                             <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
                             <div class="card-body">
-                                <a class="btn btn-light" href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar">{{offer.product_id.seller_id.username}}</a>
+                                <a class="btn btn-light" href="/product/{{offer.product_id.id}}"><img class="user_icon" src="images/default_icon.png" alt="Avatar">{{offer.product_id.seller_id.username}}</a>
                                 <h5 class="card-title">{{offer.product_id.name}}</h5>
-                                <a class="btn btn-light" href="#">Reply</a>
+                                <a class="btn btn-light" href="/view/messages/{{offer.id}}">Reply</a>
                             </div>
                         </div>
                     </div>

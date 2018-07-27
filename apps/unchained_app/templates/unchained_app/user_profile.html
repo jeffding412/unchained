@@ -144,9 +144,11 @@
                 <p>Rating: {{average}}/5</p>
             {% endif %}
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ratingModal">
-                Rate User
-            </button>
+            {% if user.id != request.session.user_id %}
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ratingModal">
+                    Rate User
+                </button>
+            {% endif %}
                 
             <!-- Modal -->
             <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-hidden="true">
