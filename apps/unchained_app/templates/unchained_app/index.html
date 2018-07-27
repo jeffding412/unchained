@@ -107,7 +107,7 @@
                                                     <div class="modal_container">
                                                         {% load static %}
                                                         <img class="modal_image" src="{% static 'unchained_app/images/modal4.png' %}">
-                                                        <a href="/addProduct">
+                                                        <a href="/settings/{{request.session.user_id}}">
                                                         <div class="modal_overlay">
                                                             <div class="modal_text">$etting$</div>
                                                         </div>
@@ -121,7 +121,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/settings/{{request.session.user_id}}">Profile</a>
+                            <a class="nav-link" href="/profile/{{request.session.user_id}}">Profile</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">Logout</a>
