@@ -85,7 +85,7 @@
                                                     <div class="modal_container">
                                                         {% load static %}
                                                         <img class="modal_image" src="{% static 'unchained_app/images/modal2.png' %}">
-                                                        <a href="/addProduct">
+                                                        <a href="/messages/{{request.session.user_id}}">
                                                         <div class="modal_overlay">
                                                             <div class="modal_text">Me$$ages</div>
                                                         </div>
@@ -96,7 +96,7 @@
                                                     <div class="modal_container">
                                                         {% load static %}
                                                         <img class="modal_image" src="{% static 'unchained_app/images/modal3.png' %}">
-                                                        <a href="/addProduct">
+                                                        <a href="/myProducts">
                                                         <div class="modal_overlay">
                                                             <div class="modal_text">My Product$</div>
                                                         </div>
