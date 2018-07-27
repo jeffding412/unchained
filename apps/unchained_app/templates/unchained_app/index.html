@@ -144,18 +144,17 @@
             <div class="row center_align">
                 <form id="ajaxForm" class="center_align"  action="" method="POST">
                     {% csrf_token %}
-                    <input name="productName" class="mr-sm-2" style="border: 1px solid #ced4da; padding: .375rem .75rem; border-radius: .25rem;" type="search" placeholder="Product name" aria-label="Search">
-                    <input name="brandName" class="mr-sm-2" style="border: 1px solid #ced4da; padding: .375rem .75rem; border-radius: .25rem;" type="search" placeholder="Brand" aria-label="Search">
-
-                    <select name="categories" class="form-control" style="width: 140px; display: inline-block;">
+                    
+                    <input name="productName" class="mr-sm-2" style="width: 200px; border: 1px solid #ced4da; padding: .375rem .75rem; border-radius: .25rem;" type="search" placeholder="Product name" aria-label="Search">
+                    <input name="brandName" class="mr-sm-2" style="width: 200px; border: 1px solid #ced4da; padding: .375rem .75rem; border-radius: .25rem;" type="search" placeholder="Brand" aria-label="Search">
+                    <select name="categories" class="form-control" style="width: 200px; display: inline-block;">
                         <option selected value="">All Categories</option>
                         <option value="Tops">Tops</option>
                         <option value="Bottoms">Bottoms</option>
                         <option value="Shoes">Shoes</option>
                         <option value="Accessories">Accessories</option>
                     </select>
-
-                    <select name="prices" class="form-control" style="width: 100px; display: inline-block;">
+                    <select name="prices" class="form-control" style="width: 200px; display: inline-block;">
                         <option selected value="All Prices">All Prices</option>
                         <option value="10">Up to $10</option>
                         <option value="50">Up to $50</option>
