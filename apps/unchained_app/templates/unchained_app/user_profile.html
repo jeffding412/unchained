@@ -205,7 +205,7 @@
                 <div class="col-6">
                     <div class="product_container">
                         {% load static %}
-                        <a href="#"><img class="product_image" src="../static/unchained_app/images2/{{ product.images.last.name }}"></a>
+                        <a href="/product/{{product.id}}"><img class="product_image" src="../static/unchained_app/images2/{{ product.images.last.name }}"></a>
                         <div class="product_overlay">
                             <div class="product_text">{{ product.name }}</div>
                         </div>
