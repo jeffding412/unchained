@@ -161,7 +161,7 @@
                 {% for product in products %}
                 <div class="col-6">
                     <div class="product_container">
-                        <a href="/product/{{product.id}}"><img class="product_image" src="{% static %}{{product.images.all.0.name}}"></a>
+                        <a href="/product/{{product.id}}"><img class="product_image" src="{% static '' %}{{product.images.all.0.name}}"></a>
                         <div class="product_overlay">
                             <a href="/product/{{product.id}}" class="product_text">{{product.name}}</a>
                         </div>
