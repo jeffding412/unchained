@@ -1,3 +1,9 @@
-#formBlock {
-	width: 400px;
+#formBlock input, #formBlock select {
+	width: 250px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.smallerSelect {
+	width: 100px;
 }

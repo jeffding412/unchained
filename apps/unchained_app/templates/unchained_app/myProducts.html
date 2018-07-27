@@ -183,10 +183,10 @@
                                                         <p class="text-danger">{{request.session.errors.category}}</p>
                                                     {% endif %} 
                                                     <select class="form-control" name="category">
-                                                        <option>Tops</option>
-                                                        <option>Bottoms</option>
-                                                        <option>Shoes</option>
-                                                        <option>Accessories</option>
+                                                        <option value="Tops">Tops</option>
+                                                        <option value="Bottoms">Bottoms</option>
+                                                        <option value="Shoes">Shoes</option>
+                                                        <option value="Accessories">Accessories</option>
                                                     </select>
                                                 </div>
                                                 <!-- <div class="form-group">
@@ -203,7 +203,8 @@
                                                 {% endif %}
                                                 <div class="form-group">
                                                     <label for="image">Image:</label><br/>
-                                                    <input id="image" type="file" name="file">
+                                                    <input id="image" type="file" name="file"><br/>
+                                                    <small>* Don't choose if you don't want to change image</small>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Description</label>

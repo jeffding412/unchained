@@ -12,11 +12,42 @@ def index(request):
     }
     return render(request, "unchained_app/index.html", context)
 
+@csrf_exempt
 def index_products(request):
-    return 
+    if request.method != "POST":
+        return redirect("/")
+
+    products = Product.objects.all()
+
+    context = {
+        "products": Product.objects.all()
+    }
+
+    return render(request, "unchained_app/index_table.html", context)
 
 def index_search(request):
-    return
+    if request.method != "POST":
+        return redirect("/")
+
+    tempProds = Product.objects.filter(name__icontains=request.POST["productName"]).filter(brand__icontains=request.POST["brandName"]).filter(category__icontains=request.POST["categories"])
+    products = []
+
+    if request.POST["prices"] != "All Prices":
+        checkPrice = int(request.POST["prices"])
+
+        for product in tempProds:
+            if product.price < checkPrice:
+                products.append(product)
+    
+    else:
+        products = tempProds
+
+    print(products)
+    context = {
+        "products": products
+    }
+
+    return render(request, "unchained_app/index_table.html", context)
 
 def login_or_register(request):
     user = User.objects.filter(email=request.POST['email'])
@@ -88,7 +119,11 @@ def adminSearch(request):
     if request.method != "POST":
         return redirect("/")
 
-    tempProds = Product.objects.filter(name__icontains=request.POST["productName"]).filter(category__contains=request.POST["categories"])
+    tempProds = None
+    if request.POST["prices"] == "All Prices":
+        tempProds = Product.objects.filter(name__icontains=request.POST["productName"]).filter(category__contains=request.POST["categories"]).filter(status__contains=request.POST["status"])
+    else:
+        tempProds = Product.objects.filter(name__icontains=request.POST["productName"]).filter(category__contains=request.POST["categories"]).filter(status__contains=request.POST["status"]).filter(price__lte=int(request.POST["prices"]))
     products = []
 
     for product in tempProds:
@@ -403,17 +438,45 @@ def user_messages(request, id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
-    user = User.objects.get(id=request.session['user_id'])
+    # user = User.objects.get(id=request.session['user_id'])
 
-    buy_offers = Offer.objects.filter(user_id=user)
-    sell_offers = Offer.objects.filter(seller_id=user)
+    # buy_offers = Offer.objects.filter(user_id=user)
+    # sell_offers = Offer.objects.filter(seller_id=user)
 
     context = {
-        'buy_offers': buy_offers,
-        'sell_offers': sell_offers
+        # 'buy_offers': buy_offers,
+        # 'sell_offers': sell_offers
     }
 
     return render(request, "unchained_app/user_messages.html", context)  
+
+@csrf_exempt
+def user_messages_buy(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+    buy_offers = Offer.objects.filter(user_id=user)
+
+    context = {
+        'offers': buy_offers
+    }
+
+    return render(request, "unchained_app/user_messages_place.html", context)  
+
+@csrf_exempt
+def user_messages_sell(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+    sell_offers = Offer.objects.filter(seller_id=user)
+
+    context = {
+        'offers': sell_offers
+    }
+
+    return render(request, "unchained_app/user_messages_place.html", context)  
 
 def make_offer(request, id):
     if not "user_id" in request.session:

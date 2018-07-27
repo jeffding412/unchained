@@ -142,23 +142,32 @@
         <div class="container">
             <h5 class="text-center font-weight-light" style="border-bottom: 1px solid gray">Browse the feed</h5>
             <div class="row center_align">
-                <div class="dropdown show">
-                    <a class="btn btn-light dropdown-toggle" style="border-color: gray" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort by
-                    </a>
+                <form id="ajaxForm" class="center_align"  action="" method="POST">
+                    {% csrf_token %}
+                    <input name="productName" class="mr-sm-2" style="border: 1px solid #ced4da; padding: .375rem .75rem; border-radius: .25rem;" type="search" placeholder="Product name" aria-label="Search">
+                    <input name="brandName" class="mr-sm-2" style="border: 1px solid #ced4da; padding: .375rem .75rem; border-radius: .25rem;" type="search" placeholder="Brand" aria-label="Search">
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-                <form class="right_align"  action="" method="POST">
-                    <input class="mr-sm-2" style="border: 1px solid #ced4da; padding: .375rem .75rem; border-radius: .25rem;" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-light my-2 my-sm-0" style="border-color: gray" type="submit">Search</button>
+                    <select name="categories" class="form-control" style="width: 140px; display: inline-block;">
+                        <option selected value="">All Categories</option>
+                        <option value="Tops">Tops</option>
+                        <option value="Bottoms">Bottoms</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Accessories">Accessories</option>
+                    </select>
+
+                    <select name="prices" class="form-control" style="width: 100px; display: inline-block;">
+                        <option selected value="All Prices">All Prices</option>
+                        <option value="10">Up to $10</option>
+                        <option value="50">Up to $50</option>
+                        <option value="100">Up to $100</option>
+                        <option value="500">Up to $500</option>
+                        <option value="500">Up to $1000</option>
+                    </select>
                 </form>
             </div>
-            <div class="row">
+
+            <div id="productPlace"></div>
+            <!-- <div class="row">
                 {% for product in products %}
                 <div class="col-6">
                     <div class="product_container">
@@ -171,39 +180,36 @@
                     <p>${{product.price}}</p>
                 </div>
                 {% endfor %}
-            </div>
+            </div> -->
         </div>
 
         <script type="text/javascript">
             function getTableFromForm(){
                 $.ajax({
-                    url: '/admins/search', 
+                    url: '/index_search', 
                     method: "post",
                     data: $("#ajaxForm").serialize(),
                     success: function(response) {
-                        $("#placeholder").html(response);
+                        $("#productPlace").html(response);
                         // console.log(response)
                     }
                 })
             }
             $(document).ready(function() {
                 $.ajax({
-                    url: '/admins/allProducts', 
+                    url: '/index_products', 
                     method: "post",
                     data: $("#ajaxForm").serialize(),
                     success: function(response) {
-                        $("#placeholder").html(response);
+                        $("#productPlace").html(response);
                         // console.log(response)
                     }
                 })
             })
-            $("input[name=productName]").keyup(function() {
+            $("input[name=productName], input[name=brandName]").keyup(function() {
                 getTableFromForm();
             })
-            $("input[name=sellerName]").keyup(function() {
-                getTableFromForm();
-            })
-            $("select[name=categories]").change( function() {
+            $("select[name=categories], select[name=prices]").change( function() {
                 getTableFromForm();
             })
         </script>

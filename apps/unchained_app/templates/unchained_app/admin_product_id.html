@@ -28,6 +28,11 @@
         </nav>
 
         <div class="container-fluid">
+            <div id="productImage">
+                <img src="../../static/unchained_app/images2/{{ product.images.last.name }}" alt="{{ product.images.last.name }}">
+                <br/><br/>
+                <h5>{{ product.name }}</h5>
+            </div>
             <div id="productInfo">
                 <h3>Product Info:</h3>
                 <p><b>Product ID:</b> {{ product.id }}</p>
@@ -38,6 +43,7 @@
                 <p><b>Status:</b> {{ product.status }}</p>
                 <p><b>Description:</b> </p>
                 <p>{{ product.description }}</p>
+                <a href="{% url 'adminEdit' productId=product.id %}">Edit Product</a>
             </div>
             <div id="sellerInfo">
                 <h3>Seller Info:</h3>
@@ -49,10 +55,6 @@
                 <p>{{ shipping.city }}, {{ shipping.state }} {{ shipping.zip }}</p>
                 <p>{{ shipping.country }}</p>
             </div>
-            <div id="editLink">
-                <a href="{% url 'adminEdit' productId=product.id %}">Edit Product</a>
-            </div>
-            
         </div>
     </body>
 </html>

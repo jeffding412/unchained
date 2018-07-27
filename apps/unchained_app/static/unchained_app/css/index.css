@@ -118,3 +118,11 @@
 .right_align {
 	margin-left: auto;
 }
+
+#buyLink, #sellLink {
+	text-decoration: none;
+}
+
+#buyLink:hover, #sellLink:hover {
+	color: lightgreen;
+}

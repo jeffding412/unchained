@@ -19,11 +19,25 @@ body {
     align-content: right;
 }
 
-#productInfo, #sellerInfo, #editLink {
-    width: 350px;
+#productInfo, #sellerInfo, #productImage {
+    width: 320px;
+    min-height: 550px;
     margin: 20px;
     padding: 10px;
     display: inline-block;
     vertical-align: top;
     border: 1px solid black;
+}
+
+#productImage {
+    width: 320px;
+    margin: 20px;
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid black;
+    text-align: center;
+}
+
+img {
+    width: 100%;
 }
