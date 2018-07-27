@@ -329,9 +329,17 @@ def user_messages(request, id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
-    
+    user = User.objects.get(id=request.session['user_id'])
 
-    return render(request, "unchained_app/user_messages.html")  
+    buy_offers = Offer.objects.filter(user_id=user)
+    print(Offer.objects.all().values())
+    # sell_offers = Offer.objects.filter(product_id.seller_id=user)
+
+    context = {
+        'buy_offers': buy_offers
+    }
+
+    return render(request, "unchained_app/user_messages.html", context)  
 
 def make_offer(request, id):
     if not "user_id" in request.session:

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Messages</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/user_messages.css"/>
-    <link rel="icon" href="images/broken_chain.png">
-</head>
-<body>
-	<nav class="navbar navbar-expand-lg navbar-light nav_custom">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Messages</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/user_messages.css"/>
+        <link rel="icon" href="images/broken_chain.png">
+    </head>
+    <body>
+	    <nav class="navbar navbar-expand-lg navbar-light nav_custom">
             <a class="navbar-brand" href="#">Unchained <img class="nav_logo" src="images/broken_chain.png"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,8 +54,9 @@
                 </ul>
             </div>
         </nav>
-        <div class="row">
-            <div class="col my-sm-0">
+        <div class="row text-center">
+            <div class="col">
+                <h2>Sell Offers</h2>
                 <div class="container" style="text-align: center">
                     <!-- once clicked opens up a popup of all the messages and offers-->
                     <div class="card container mt-2" style="width: 18rem;">
@@ -68,46 +69,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col my-sm-0">
-                <div class="container" style="text-align: center">
-                    <!-- once clicked opens up a popup of all the messages and offers-->
-                    <div class="card container mt-2" style="width: 18rem;">
-                        <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
-                        <div class="card-body">
-                            <a class="btn btn-light" href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
-                            <h5 class="card-title">Product name</h5>
-                            <a class="btn btn-light" href="#">Reply</a>
+            <div class="col">
+                <h2>Made Offers</h2>
+                {% for offer in buy_offers %}
+                    <div class="container" style="text-align: center">
+                        <!-- once clicked opens up a popup of all the messages and offers-->
+                        <div class="card container mt-2" style="width: 18rem;">
+                            <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
+                            <div class="card-body">
+                                <a class="btn btn-light" href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar">{{offer.product_id.seller_id.username}}</a>
+                                <h5 class="card-title">{{offer.product_id.name}}</h5>
+                                <a class="btn btn-light" href="#">Reply</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col my-sm-0">
-                <div class="container" style="text-align: center">
-                    <!-- once clicked opens up a popup of all the messages and offers-->
-                    <div class="card container mt-2" style="width: 18rem;">
-                        <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
-                        <div class="card-body">
-                            <a class="btn btn-light" href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
-                            <h5 class="card-title">Product name</h5>
-                            <a class="btn btn-light" href="#">Reply</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col my-sm-0">
-                <div class="container" style="text-align: center">
-                    <!-- once clicked opens up a popup of all the messages and offers-->
-                    <div class="card container mt-2" style="width: 18rem;">
-                        <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
-                        <div class="card-body">
-                            <a class="btn btn-light" href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
-                            <h5 class="card-title">Product name</h5>
-                            <a class="btn btn-light" href="#">Reply</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-
-</body>
+    </body>
 </html>
