@@ -409,3 +409,14 @@ def user_profile(request,id):
         'products': products
     }
     return render(request, 'unchained_app/user_profile.html', context)
+
+def rate(request,id):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=id)
+    user.num_sold += 1
+    user.rating += int(request.POST['rating'])
+    user.save()
+    
+    return redirect('/profile/'+id)
