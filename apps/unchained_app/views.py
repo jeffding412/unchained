@@ -387,6 +387,6 @@ def reply(request, id):
 
     offer = Offer.objects.get(id=id)
     user = User.objects.get(id=request.session['user_id'])
-    # Reply.objects.create('')
+    Reply.objects.create(message=request.POST['reply'],offer=offer,user_id=user)
 
     return redirect('/view/messages/'+id)
