@@ -29,10 +29,7 @@ urlpatterns = [
     url(r'^view/messages/(?P<id>\d+)$', views.all_messages),
     url(r'^reply/(?P<id>\d+)$', views.reply),
     url(r'^profile/(?P<id>\d+)$', views.user_profile),
-<<<<<<< HEAD
     url(r'^index_products$', views.index_products, name="index_products"),
-    url(r'^index_search$', views.index_search, name="index_search")
-=======
+    url(r'^index_search$', views.index_search, name="index_search"),
     url(r'^rate/(?P<id>\d+)$', views.rate),
->>>>>>> origin/master
 ]
