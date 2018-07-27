@@ -391,5 +391,6 @@ def reply(request, id):
 
     return redirect('/view/messages/'+id)
 
-def user_profile(request, id):
+def user_profile(request):
+
     return render(request, 'unchained_app/user_profile.html')
