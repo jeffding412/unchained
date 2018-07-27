@@ -332,9 +332,19 @@ def user_messages(request, id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
-    
+    user = User.objects.get(id=request.session['user_id'])
 
-    return render(request, "unchained_app/user_messages.html")  
+    buy_offers = Offer.objects.filter(user_id=user)
+    sell_offers = Offer.objects.filter(seller_id=user)
+    for offer in sell_offers:
+        print(offer.user_id.username)
+
+    context = {
+        'buy_offers': buy_offers,
+        'sell_offers': sell_offers
+    }
+
+    return render(request, "unchained_app/user_messages.html", context)  
 
 def make_offer(request, id):
     if not "user_id" in request.session:
@@ -348,6 +358,6 @@ def make_offer(request, id):
     product = Product.objects.get(id=id)
     user = User.objects.get(id=request.session['user_id'])
 
-    Offer.objects.create(price=request.POST['price'],message=request.POST['message'],product_id=product,user_id=user)
+    Offer.objects.create(price=request.POST['price'],message=request.POST['message'],product_id=product,user_id=user,seller=product.seller_id)
 
     return redirect('/messages/'+str(request.session['user_id']))

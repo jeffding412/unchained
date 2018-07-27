@@ -130,60 +130,39 @@
                 </ul>
             </div>
         </nav>
-        <div class="row">
-            <div class="col my-sm-0">
-                <div class="container" style="text-align: center">
-                    <!-- once clicked opens up a popup of all the messages and offers-->
-                    <div class="card container mt-2" style="width: 18rem;">
-                        <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
-                        <div class="card-body">
-                            <a class="btn btn-light" href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
-                            <h5 class="card-title">Product name</h5>
-                            <a class="btn btn-light" href="#">Reply</a>
+        <div class="row text-center">
+            <div class="col">
+                <h2>Sell Offers</h2>
+                {% for offer in sell_offers %}
+                    <div class="container" style="text-align: center">
+                        <!-- once clicked opens up a popup of all the messages and offers-->
+                        <div class="card container mt-2" style="width: 18rem;">
+                            <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
+                            <div class="card-body">
+                                <a class="btn btn-light" href="/product/{{offer.product_id.id}}"><img class="user_icon" src="images/default_icon.png" alt="Avatar">{{offer.user_id.username}}</a>
+                                <h5 class="card-title">{{offer.product_id.name}}</h5>
+                                <a class="btn btn-light" href="/view/messages/{{offer.id}}">Reply</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-            <div class="col my-sm-0">
-                <div class="container" style="text-align: center">
-                    <!-- once clicked opens up a popup of all the messages and offers-->
-                    <div class="card container mt-2" style="width: 18rem;">
-                        <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
-                        <div class="card-body">
-                            <a class="btn btn-light" href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
-                            <h5 class="card-title">Product name</h5>
-                            <a class="btn btn-light" href="#">Reply</a>
+            <div class="col">
+                <h2>Made Offers</h2>
+                {% for offer in buy_offers %}
+                    <div class="container" style="text-align: center">
+                        <!-- once clicked opens up a popup of all the messages and offers-->
+                        <div class="card container mt-2" style="width: 18rem;">
+                            <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
+                            <div class="card-body">
+                                <a class="btn btn-light" href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar">{{offer.product_id.seller_id.username}}</a>
+                                <h5 class="card-title">{{offer.product_id.name}}</h5>
+                                <a class="btn btn-light" href="#">Reply</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col my-sm-0">
-                <div class="container" style="text-align: center">
-                    <!-- once clicked opens up a popup of all the messages and offers-->
-                    <div class="card container mt-2" style="width: 18rem;">
-                        <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
-                        <div class="card-body">
-                            <a class="btn btn-light" href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
-                            <h5 class="card-title">Product name</h5>
-                            <a class="btn btn-light" href="#">Reply</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col my-sm-0">
-                <div class="container" style="text-align: center">
-                    <!-- once clicked opens up a popup of all the messages and offers-->
-                    <div class="card container mt-2" style="width: 18rem;">
-                        <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
-                        <div class="card-body">
-                            <a class="btn btn-light" href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
-                            <h5 class="card-title">Product name</h5>
-                            <a class="btn btn-light" href="#">Reply</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-
-</body>
+    </body>
 </html>
