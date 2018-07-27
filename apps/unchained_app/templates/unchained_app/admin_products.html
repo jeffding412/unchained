@@ -42,6 +42,19 @@
                         <option value="Shoes">Shoes</option>
                         <option value="Accessories">Accessories</option>
                     </select>
+                    <select name="prices" class="form-control" style="width: 120px;">
+                        <option selected value="All Prices">All Prices</option>
+                        <option value="10">Up to $10</option>
+                        <option value="50">Up to $50</option>
+                        <option value="100">Up to $100</option>
+                        <option value="500">Up to $500</option>
+                        <option value="500">Up to $1000</option>
+                    </select>
+                    <select name="status" class="form-control" style="width: 120px;">
+                        <option selected value="">All Status</option>
+                        <option value="For Sale">For Sale</option>
+                        <option value="Sold">Sold</option>
+                    </select>
                 </form>
             </div><br/>
 
@@ -70,13 +83,10 @@
                     }
                 })
             })
-            $("input[name=productName]").keyup(function() {
+            $("input[name=productName], input[name=sellerName]").keyup(function() {
                 getTableFromForm();
             })
-            $("input[name=sellerName]").keyup(function() {
-                getTableFromForm();
-            })
-            $("select[name=categories]").change( function() {
+            $("select[name=categories], select[name=status], select[name=prices]").change( function() {
                 getTableFromForm();
             })
         </script>

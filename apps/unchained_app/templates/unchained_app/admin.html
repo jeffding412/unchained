@@ -17,7 +17,7 @@
     <body class="text-center">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 offset-md-4 align-self-center">
+                <div id="login_container" class="col-md-4 offset-md-4 align-self-center">
                     <h2>Admin Login</h2><br/>
                     <form action="{% url 'adminLogin' %}" method="post">
                         {% csrf_token %}
