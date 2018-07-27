@@ -135,29 +135,10 @@
                 <div class="container">
                     {% for message in messages %}
                         <div class="container">
-                            <a href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
-                            <p>Yo, let me cop</p>
+                            <a href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> {{message.user_id.username}}</a>
+                            <p>{{message.message}}</p>
                         </div>
                     {% endfor %}
-                    <div class="container">
-                        <a href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
-                        <p>Yo, let me cop</p>
-                    </div>
-
-                    <div class="container darker">
-                        <a href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 2's name</a>
-                        <p>Hey! Fuck no!</p>
-                    </div>
-
-                    <div class="container">
-                        <a href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 1's name</a>
-                        <p>Sweet! So, what do you wanna do today?</p>
-                    </div>
-
-                    <div class="container darker">
-                        <a href="#"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> User 2's name</a>
-                        <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-                    </div>
                 </div>
             </div>
         </div>
