@@ -158,6 +158,19 @@
                 </form>
             </div>
             <div class="row">
+                {% for product in products %}
+                <div class="col-6">
+                    <div class="product_container">
+                        <a href="/product/{{product.id}}"><img class="product_image" src="{% static %}{{product.images.all.0.name}}"></a>
+                        <div class="product_overlay">
+                            <a href="/product/{{product.id}}" class="product_text">{{product.name}}</a>
+                        </div>
+                    </div>
+                    <p class="font-weight-bold" style="margin-bottom: 0">{{product.brand}}</p>
+                    <p>${{product.price}}</p>
+                    <p>{{product.images.all.0.name}}</p>
+                </div>
+                {% endfor %}
                 <div class="col-6">
                     <div class="product_container">
                         {% load static %}
