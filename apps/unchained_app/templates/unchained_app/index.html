@@ -9,6 +9,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         {% load static %}
         <link rel="stylesheet" type="text/css" media="screen" href="{% static 'unchained_app/css/index.css' %}">
         {% load static %}
@@ -161,7 +162,7 @@
                 {% for product in products %}
                 <div class="col-6">
                     <div class="product_container">
-                        <a href="/product/{{product.id}}"><img class="product_image" src="{% static '' %}{{product.images.all.0.name}}"></a>
+                        <a href="/product/{{product.id}}"><img class="product_image" src="../static/unchained_app/images2/{{ product.images.last.name }}"></a>
                         <div class="product_overlay">
                             <a href="/product/{{product.id}}" class="product_text">{{product.name}}</a>
                         </div>
@@ -170,73 +171,41 @@
                     <p>${{product.price}}</p>
                 </div>
                 {% endfor %}
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="/product/{{product.id}}"><img class="product_image" src="{% static 'unchained_app/images/ysl1.png' %}"></a>
-                        <div class="product_overlay">
-                            <a href="/product/{{product.id}}" class="product_text">Product Name</a>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Supreme</p>
-                    <p>$200</p>
-                </div>
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/palace.png' %}"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
-                    <p>Price</p>
-                </div>
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/acronym.png' %}"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
-                    <p>Price</p>
-                </div>
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/nikes.png' %}"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
-                    <p>Price</p>
-                </div>
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/supreme_fade.png' %}"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
-                    <p>Price</p>
-                </div>
-                <div class="col-6">
-                    <div class="product_container">
-                        {% load static %}
-                        <a href="#"><img class="product_image" src="{% static 'unchained_app/images/revenge.png' %}"></a>
-                        <div class="product_overlay">
-                            <div class="product_text">Product Name</div>
-                        </div>
-                    </div>
-                    <p class="font-weight-bold" style="margin-bottom: 0">Brand Name</p>
-                    <p>Price</p>
-                </div>
             </div>
         </div>
+
+        <script type="text/javascript">
+            function getTableFromForm(){
+                $.ajax({
+                    url: '/admins/search', 
+                    method: "post",
+                    data: $("#ajaxForm").serialize(),
+                    success: function(response) {
+                        $("#placeholder").html(response);
+                        // console.log(response)
+                    }
+                })
+            }
+            $(document).ready(function() {
+                $.ajax({
+                    url: '/admins/allProducts', 
+                    method: "post",
+                    data: $("#ajaxForm").serialize(),
+                    success: function(response) {
+                        $("#placeholder").html(response);
+                        // console.log(response)
+                    }
+                })
+            })
+            $("input[name=productName]").keyup(function() {
+                getTableFromForm();
+            })
+            $("input[name=sellerName]").keyup(function() {
+                getTableFromForm();
+            })
+            $("select[name=categories]").change( function() {
+                getTableFromForm();
+            })
+        </script>
     </body>
 </html>

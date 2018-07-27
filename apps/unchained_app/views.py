@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 import bcrypt
 from .models import User, Shipping, Product, Image, Offer, Reply
+from .forms import UploadFileForm
 
 # Create your views here.
 def index(request):
@@ -10,6 +11,12 @@ def index(request):
     'products' : Product.objects.all()
     }
     return render(request, "unchained_app/index.html", context)
+
+def index_products(request):
+    return 
+
+def index_search(request):
+    return
 
 def login_or_register(request):
     user = User.objects.filter(email=request.POST['email'])
@@ -51,6 +58,7 @@ def adminLogin(request):
     return redirect("/admins/products")
 
 def adminProducts(request):
+    print(Image.objects.count())
     if "curUserId" not in request.session.keys():
         return redirect("/")
 
@@ -146,10 +154,21 @@ def adminProcessEdit(request, productId):
         return redirect("/products")
 
     errors = Product.objects.validator_admin(request.POST)
+    hasErrors = False
 
     if len(errors) > 0:
         for tag, error in errors.items():
             messages.error(request, error, extra_tags=tag)
+        hasErrors = True
+
+    if UploadFileForm(request.POST, request.FILES).is_valid():
+        imageErrors = Image.objects.validator(request.FILES)
+        if len(imageErrors) > 0:
+            for tag, error in imageErrors.items():
+                messages.error(request, error, extra_tags=tag)
+            hasErrors = True
+
+    if hasErrors:
         return redirect("/admins/products/" + str(productId) + "/edit")
 
     product = Product.objects.get(id=productId)
@@ -157,8 +176,16 @@ def adminProcessEdit(request, productId):
     product.brand = request.POST["brand"]
     product.description = request.POST["description"]
     product.category = request.POST["category"]
-    product.image = request.POST["image"]
     product.save()
+
+    if UploadFileForm(request.POST, request.FILES).is_valid():
+        product.images.all().delete()
+
+        newImage = Image.objects.create(
+            name = request.FILES["file"].name,
+            imageFile = request.FILES["file"],
+            product_id = product
+        )
 
     return redirect("/admins/products/" + str(productId))
 
@@ -184,13 +211,36 @@ def add_product_to_id(request, id):
         return redirect('/logout')
 
     request.session['errors'] = Product.objects.validator(request.POST)
+    hasErrors = False
+
     if len(request.session['errors']):
         # redirect the user back to the form to fix the errors
+        hasErrors = True
+
+    if not UploadFileForm(request.POST, request.FILES).is_valid():
+        print("hi")
+        messages.error(request, "Image file requred", extra_tags="file")
+
+    else:
+        imageErrors = Image.objects.validator(request.FILES)
+        if len(imageErrors) > 0:
+            for tag, error in imageErrors.items():
+                messages.error(request, error, extra_tags=tag)
+            hasErrors = True
+
+    if hasErrors:
         return redirect('/addProduct')
 
     user = User.objects.get(id=request.session['user_id'])
 
-    Product.objects.create(name=request.POST['name'],brand=request.POST['brand'],category=request.POST['category'],price=int(request.POST['price']),description=request.POST['description'],status="For Sale",seller_id=user)
+    newProduct = Product.objects.create(name=request.POST['name'],brand=request.POST['brand'],category=request.POST['category'],price=int(request.POST['price']),description=request.POST['description'],status="For Sale",seller_id=user)
+
+    if UploadFileForm(request.POST, request.FILES).is_valid():
+        newImage = Image.objects.create(
+            name = request.FILES["file"].name,
+            imageFile = request.FILES["file"],
+            product_id = newProduct
+        )
 
     return redirect('/')
 
@@ -285,8 +335,20 @@ def editProduct(request, id):
         return redirect('/logout')
 
     request.session['errors'] = Product.objects.validator(request.POST)
+    hasErrors = False
+
     if len(request.session['errors']):
         # redirect the user back to the form to fix the errors
+        hasErrors = True
+
+    if UploadFileForm(request.POST, request.FILES).is_valid():
+        imageErrors = Image.objects.validator(request.FILES)
+        if len(imageErrors) > 0:
+            for tag, error in imageErrors.items():
+                messages.error(request, error, extra_tags=tag)
+            hasErrors = True
+
+    if hasErrors:
         return redirect('/myProducts')
 
     product = Product.objects.get(id=id)
@@ -296,6 +358,15 @@ def editProduct(request, id):
     product.price = int(request.POST['price'])
     product.description = request.POST['description']
     product.save()
+
+    if UploadFileForm(request.POST, request.FILES).is_valid():
+        product.images.all().delete()
+
+        newImage = Image.objects.create(
+            name = request.FILES["file"].name,
+            imageFile = request.FILES["file"],
+            product_id = product
+        )
 
     return redirect('/myProducts')
 

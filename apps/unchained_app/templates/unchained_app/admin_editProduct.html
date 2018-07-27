@@ -14,24 +14,25 @@
         <link rel="icon" href="https://vignette.wikia.nocookie.net/immortalpedia/images/4/45/Broken_Chain.png/revision/latest?cb=20160418021259">
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{% url 'adminProducts' %}">Unchained</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'adminProducts' %}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
         <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="{% url 'adminProducts' %}">Unchained</a>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'adminProducts' %}">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
             <br/>
             <div class="editBlock">
                 <h3>Edit Product - ID {{ product.id }}</h3>
-                <form action="{% url 'adminProcessEdit' productId=product.id %}" method="post">
+                <form enctype="multipart/form-data" action="{% url 'adminProcessEdit' productId=product.id %}" method="post">
                     {% csrf_token %}
                     {% if messages %}
                         {% for message in messages %}
@@ -72,15 +73,23 @@
                         <label for="category">Categories: </label>
                         <select class="form-control" id="category" name="category">
                             <option value="{{ product.category }}">{{ product.category }}</option>
-                            <option value="Top">Top</option>
+                            <option value="Tops">Tops</option>
                             <option value="Bottoms">Bottoms</option>
                             <option value="Shoes">Shoes</option>
                             <option value="Accessories">Accessories</option>
                         </select>
                     </div>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.extra_tags == "file" %}
+                                <p class="error">{{ message }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                     <div class="form-group">
-                        <label for="image">Image: </label>
-                        <input class="form-control-file" id="image" type="file" name="image" value="{{ product.image }}">
+                        <label for="image">Image:</label><br/>
+                        <input id="image" type="file" name="file">
                     </div>
                     <br/>
                     <button type="submit" class="btn btn-primary">Update</button>

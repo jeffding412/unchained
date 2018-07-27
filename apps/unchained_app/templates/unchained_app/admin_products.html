@@ -15,21 +15,20 @@
     </head>
 
     <body>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#">Unchained</a>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Products<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'logout' %}">logout</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Unchained</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Products<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <div class="container-fluid">
-            
             <br/>
             <div id="formBlock">
                 <form id="ajaxForm" action="{% url 'adminSearch' %}" method="post">
@@ -38,7 +37,7 @@
                     <input type="text" class="form-control" placeholder="Search seller.." name="sellerName">
                     <select name="categories" class="form-control">
                         <option selected value="">All Categories</option>
-                        <option value="Top">Top</option>
+                        <option value="Tops">Tops</option>
                         <option value="Bottoms">Bottoms</option>
                         <option value="Shoes">Shoes</option>
                         <option value="Accessories">Accessories</option>

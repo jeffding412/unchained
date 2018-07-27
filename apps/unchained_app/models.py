@@ -199,13 +199,14 @@ class ImageManager(models.Manager):
     def validator(self, postData):
         errors = {}
 
-        if len(postData["name"]) < 1:
-            errors["name"] = "Name cannot be blank"
+        if (not postData["file"].name.endswith(".jpg")) and (not postData["file"].name.endswith(".jpeg")) and (not postData["file"].name.endswith(".png")):
+            errors["file"] = "File must be in jpg, jpeg, or png format"
 
         return errors
 
 class Image(models.Model):
     name = models.CharField(max_length=255)
+    imageFile = models.FileField(upload_to="apps/unchained_app/static/unchained_app/images2")
     product_id = models.ForeignKey(Product, related_name="images")
 
     objects = ImageManager()
