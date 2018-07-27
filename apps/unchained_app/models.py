@@ -227,6 +227,7 @@ class Offer(models.Model):
     price = models.IntegerField()
     product_id = models.ForeignKey(Product, related_name="offers")
     user_id = models.ForeignKey(User, related_name="offers")
+    seller = models.ForeignKey(User, related_name="sell_offers")
     message = models.TextField()
 
     objects = OfferManager()

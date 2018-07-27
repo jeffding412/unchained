@@ -356,6 +356,6 @@ def make_offer(request, id):
     product = Product.objects.get(id=id)
     user = User.objects.get(id=request.session['user_id'])
 
-    Offer.objects.create(price=request.POST['price'],message=request.POST['message'],product_id=product,user_id=user)
+    Offer.objects.create(price=request.POST['price'],message=request.POST['message'],product_id=product,user_id=user,seller=product.seller_id)
 
     return redirect('/messages/'+str(request.session['user_id']))
