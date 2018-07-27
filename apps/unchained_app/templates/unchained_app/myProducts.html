@@ -136,6 +136,7 @@
             <div class="row">
                 {% for product in products %}
                     <div class="card col-xs-4" style="width: 18rem;">
+                        <p style="text-align: center;">{{product.status}}</p>
                         <img class="card-img-top" src="../static/unchained_app/images2/{{ product.images.last.name }}" alt="{{product.name}}">
                         <div class="card-body">
                             <h5 class="card-title">{{product.name}}</h5>

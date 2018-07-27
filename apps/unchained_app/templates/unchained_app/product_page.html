@@ -144,7 +144,7 @@
   <div class="carousel-inner">
     <div class="carousel-item active">
       {% load static %}  
-      <img class="d-block w-100" src="{% static 'unchained_app/images/ysl1.png' %}" alt="First slide">
+      <img class="d-block w-100" src="../static/unchained_app/images2/{{product.images.all.last.name}}" alt="First slide">
     </div>
     <div class="carousel-item">
       {% load static %}
@@ -170,7 +170,8 @@
 <div class="row">
     <div class="col">
         <div class="container">
-        	<h1>{{product.name}}</h1>
+            <h3 class="font-weight-light">{{product.name}}</h3>
+            <h5>{{product.brand}}</h5>
             <p>Price: ${{product.price}}</p>
             <p>{{product.description}}</p>
         <!-- Place a modal for offer here -->
