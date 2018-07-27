@@ -134,12 +134,14 @@
             <div class="col">
                 <div class="container">
                     <div class="container">
-                        <a href="/profile/{{offer.user_id.id}}"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> {{offer.user_id.username}}</a>
+                        {% load static %}
+                        <a href="/profile/{{offer.user_id.id}}"><img class="user_icon" src="{% static 'unchained_app/images/default_icon.png' %}" alt="Avatar"> {{offer.user_id.username}}</a>
                         <p>{{offer.message}}</p>
                     </div>
                     {% for message in messages %}
                         <div class="container">
-                            <a href="/profile/{{message.user_id.id}}"><img class="user_icon" src="images/default_icon.png" alt="Avatar"> {{message.user_id.username}}</a>
+                            {% load static %}
+                            <a href="/profile/{{message.user_id.id}}"><img class="user_icon" src="{% static 'unchained_app/images/default_icon.png' %}" alt="Avatar"> {{message.user_id.username}}</a>
                             <p>{{message.message}}</p>
                         </div>
                     {% endfor %}

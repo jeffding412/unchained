@@ -135,7 +135,10 @@
             {% if user.username %}
                 <h4>{{user.username}}</h4>
             {% else %}
-                <h4>{{user.email}}</h4>
+                <p>{{user.email}}</p>
+            {% endif %}
+            {% if user.first_name %}
+                <h5 class="text-secondary font-weight-light">{{user.first_name}} {{user.last_name}}</h5>
             {% endif %}
             <i>"You can call me ugly, but you can't call me broke" - Gucci Mane</i>
             {% if average == -1 %}
