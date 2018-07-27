@@ -2,6 +2,7 @@
     {% for product in products %}
     <div class="col-6">
         <div class="product_container">
+            <p>{{product.status}}</p>
             <a href="/product/{{product.id}}"><img class="product_image" src="../static/unchained_app/images2/{{ product.images.last.name }}"></a>
             <div class="product_overlay">
                 <a href="/product/{{product.id}}" class="product_text">{{product.name}}</a>

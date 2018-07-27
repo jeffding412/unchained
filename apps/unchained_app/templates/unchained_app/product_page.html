@@ -136,41 +136,39 @@
 	<div class="row">
         <div class="col">
 	       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      {% load static %}  
-      <img class="d-block w-100" src="{% static 'unchained_app/images/ysl1.png' %}" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      {% load static %}
-      <img class="d-block w-100" src="{% static 'unchained_app/images/ysl2.png' %}" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-        {% load static %}
-      <img class="d-block w-100" src="{% static 'unchained_app/images/ysl3.png' %}" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  {% load static %}  
+                  <img class="d-block w-100" src="../static/unchained_app/images2/{{product.images.all.last.name}}" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                  {% load static %}
+                  <img class="d-block w-100" src="{% static 'unchained_app/images/ysl2.png' %}" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    {% load static %}
+                  <img class="d-block w-100" src="{% static 'unchained_app/images/ysl3.png' %}" alt="Third slide">
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
         </div>
-	</div>
-</div>
-<div class="row">
-    <div class="col">
+        <div class="col">
         <div class="container">
-        	<h1>{{product.name}}</h1>
+            <h3 class="font-weight-light">{{product.name}}</h3>
+            <h5>{{product.brand}}</h5>
             <p>Price: ${{product.price}}</p>
             <p>{{product.description}}</p>
         <!-- Place a modal for offer here -->
@@ -280,10 +278,7 @@
             </div>
         {% endif %}
         </div>
-    </div>
-</div>
-<div class="row mt-2">
-    <div class="col">
+        <div class="col mt-2">
         <div class="container">
         {% load static %}
             <a href="/profile/{{product.seller_id.id}}">
@@ -297,6 +292,14 @@
             {% endif %}
         </div>
     </div>
+    </div>
+</div>
+	</div>
+
+<div class="row">
+
+</div>
+<div class="row mt-2">
 </div>
 </body>
 </html>
