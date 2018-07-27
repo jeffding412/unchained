@@ -286,8 +286,10 @@
     <div class="col">
         <div class="container">
         {% load static %}
-            <img class="user_icon" src="{% static 'unchained_app/images/default_icon.png' %}">
-            <h4 class="d-inline-block">{{user.username}}</h4>
+            <a href="/profile/{{user.id}}">
+                <img class="user_icon" src="{% static 'unchained_app/images/default_icon.png' %}">
+                <h4 class="d-inline-block">{{user.username}}</h4>
+            </a>
             {% if rating != -1 %}
                 <p>Rating: <span class="font-weight-bold">{{user.rating}}/5</span></p>
             {% else %}
