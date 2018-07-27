@@ -386,8 +386,8 @@ def product_page(request, id):
 
     product = Product.objects.get(id=id)
     user = User.objects.get(id=request.session['user_id'])
-    if user.num_sold != 0:
-        average = user.rating/user.num_sold
+    if product.seller_id.num_sold != 0:
+        average = product.seller_id.rating/product.seller_id.num_sold
     else:
         average = -1
 
