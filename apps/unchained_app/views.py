@@ -6,7 +6,10 @@ from .models import User, Shipping, Product, Image, Offer
 
 # Create your views here.
 def index(request):
-    return render(request, "unchained_app/index.html")
+    context = {
+    'products' : Product.objects.all()
+    }
+    return render(request, "unchained_app/index.html", context)
 
 def login_or_register(request):
     user = User.objects.filter(email=request.POST['email'])

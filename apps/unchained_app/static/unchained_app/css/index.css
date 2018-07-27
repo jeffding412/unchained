@@ -106,3 +106,15 @@
 	background-color: black;
 	color: white;
 }
+
+.image_featured {
+	width: 100%;
+	height: auto;
+}
+.user_icon {
+	height: 2.5rem;
+	width: 2.5rem;
+}
+.right_align {
+	margin-left: auto;
+}
