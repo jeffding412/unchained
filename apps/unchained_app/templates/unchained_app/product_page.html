@@ -286,12 +286,12 @@
     <div class="col">
         <div class="container">
         {% load static %}
-            <a href="/profile/{{user.id}}">
+            <a href="/profile/{{product.seller_id.id}}">
                 <img class="user_icon" src="{% static 'unchained_app/images/default_icon.png' %}">
-                <h4 class="d-inline-block">{{user.username}}</h4>
+                <h4 class="d-inline-block">{{product.seller_id.username}}</h4>
             </a>
             {% if rating != -1 %}
-                <p>Rating: <span class="font-weight-bold">{{user.rating}}/5</span></p>
+                <p>Rating: <span class="font-weight-bold">{{rating}}/5</span></p>
             {% else %}
                 <p>Rating: <span class="font-weight-bold">N/A</span></p>
             {% endif %}
