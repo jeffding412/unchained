@@ -438,17 +438,45 @@ def user_messages(request, id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
-    user = User.objects.get(id=request.session['user_id'])
+    # user = User.objects.get(id=request.session['user_id'])
 
-    buy_offers = Offer.objects.filter(user_id=user)
-    sell_offers = Offer.objects.filter(seller_id=user)
+    # buy_offers = Offer.objects.filter(user_id=user)
+    # sell_offers = Offer.objects.filter(seller_id=user)
 
     context = {
-        'buy_offers': buy_offers,
-        'sell_offers': sell_offers
+        # 'buy_offers': buy_offers,
+        # 'sell_offers': sell_offers
     }
 
     return render(request, "unchained_app/user_messages.html", context)  
+
+@csrf_exempt
+def user_messages_buy(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+    buy_offers = Offer.objects.filter(user_id=user)
+
+    context = {
+        'offers': buy_offers
+    }
+
+    return render(request, "unchained_app/user_messages_place.html", context)  
+
+@csrf_exempt
+def user_messages_sell(request):
+    if not "user_id" in request.session:
+        return redirect('/logout')
+
+    user = User.objects.get(id=request.session['user_id'])
+    sell_offers = Offer.objects.filter(seller_id=user)
+
+    context = {
+        'offers': sell_offers
+    }
+
+    return render(request, "unchained_app/user_messages_place.html", context)  
 
 def make_offer(request, id):
     if not "user_id" in request.session:

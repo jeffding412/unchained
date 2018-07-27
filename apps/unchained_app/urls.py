@@ -32,4 +32,6 @@ urlpatterns = [
     url(r'^index_products$', views.index_products, name="index_products"),
     url(r'^index_search$', views.index_search, name="index_search"),
     url(r'^rate/(?P<id>\d+)$', views.rate),
+    url(r'^messages/buy$', views.user_messages_buy, name="messagesBuy"),
+    url(r'^messages/sell$', views.user_messages_sell, name="messagesSell")
 ]

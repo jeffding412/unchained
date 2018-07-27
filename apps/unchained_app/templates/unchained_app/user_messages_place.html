@@ -1,0 +1,15 @@
+{% for offer in offers %}
+    <div class="container" style="text-align: center">
+        <!-- once clicked opens up a popup of all the messages and offers-->
+        <div class="card container mt-2" style="width: 18rem;">
+            <img class="card-img-top" src="../static/unchained_app/images2/{{ offer.product_id.images.all.last.name }}" alt="Card image cap">
+            <div class="card-body">
+                <a class="btn btn-light" href="/product/{{offer.product_id.id}}"><img class="user_icon" src="../static/unchained_app/images/default_icon.png" alt="Avatar">{{offer.product_id.seller_id.username}}</a>
+                <h5 class="card-title">{{offer.product_id.name}}</h5>
+                <a class="btn btn-light" href="/view/messages/{{offer.id}}">Reply</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+

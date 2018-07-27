@@ -21,7 +21,7 @@ body {
 
 #productInfo, #sellerInfo, #productImage {
     width: 320px;
-    height: 550px;
+    min-height: 550px;
     margin: 20px;
     padding: 10px;
     display: inline-block;

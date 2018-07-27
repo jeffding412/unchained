@@ -131,12 +131,13 @@
                 </ul>
             </div>
         </nav>
-        <div class="row text-center">            
+        <div class="row text-center">          
             <div class="col">
-                <h2>Buy Messages</h2>
-                {% for offer in buy_offers %}
+                <br/>
+                <a id="buyLink" href="#"><h2>Buy Messages</h2></a>
+                <!-- {% for offer in buy_offers %}
                     <div class="container" style="text-align: center">
-                        <!-- once clicked opens up a popup of all the messages and offers-->
+                        once clicked opens up a popup of all the messages and offers
                         <div class="card container mt-2" style="width: 18rem;">
                             <img class="card-img-top" src="../static/unchained_app/images2/{{ offer.product_id.images.all.last.name }}" alt="Card image cap">
                             <div class="card-body">
@@ -146,13 +147,13 @@
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+                {% endfor %} -->
             </div>
             <div class="col">
-                <h2>Sell Messages</h2>
-                {% for offer in sell_offers %}
+                <br/>
+                <a id="sellLink" href="#"><h2>Sell Messages</h2></a>
+                <!-- {% for offer in sell_offers %}
                     <div class="container" style="text-align: center">
-                        <!-- once clicked opens up a popup of all the messages and offers-->
                         <div class="card container mt-2" style="width: 18rem;">
                             <img class="card-img-top" src="images/supreme_fade.png" alt="Card image cap">
                             <div class="card-body">
@@ -163,8 +164,54 @@
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+                {% endfor %} -->
             </div>
         </div>
+        <hr>
+        <div class="row text-center">
+            <div class="col">
+                <div id="messagesHolder"></div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            // $(document).ready(function() {
+            //     $.ajax({
+            //         url: '/index_products', 
+            //         method: "post",
+            //         data: $("#ajaxForm").serialize(),
+            //         success: function(response) {
+            //             $("#productPlace").html(response);
+            //             // console.log(response)
+            //         }
+            //     })
+            // })
+            $("#buyLink").click(function() {
+                $.ajax({
+                    url: '/messages/buy', 
+                    method: "post",
+                    data: $("#ajaxForm").serialize(),
+                    success: function(response) {
+                        $("#messagesHolder").html(response);
+                        // console.log(response)
+                        // console.log("buy")
+                    }
+                })
+                return false;
+            })
+            $("#sellLink").click(function() {
+                $.ajax({
+                    url: '/messages/sell', 
+                    method: "post",
+                    data: $("#ajaxForm").serialize(),
+                    success: function(response) {
+                        $("#messagesHolder").html(response);
+                        // console.log(response)
+                        // console.log("sell")
+                    }
+                })
+                return false;
+            })
+        </script>
     </body>
 </html>
