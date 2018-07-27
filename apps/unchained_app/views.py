@@ -391,11 +391,11 @@ def reply(request, id):
 
     return redirect('/view/messages/'+id)
 
-def user_profile(request):
+def user_profile(request,id):
     if not "user_id" in request.session:
         return redirect('/logout')
 
-    user = User.objects.get(id=request.session['user_id'])
+    user = User.objects.get(id=id)
     products = Product.objects.filter(seller_id=user)
 
     if user.num_sold != 0:
