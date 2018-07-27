@@ -390,3 +390,6 @@ def reply(request, id):
     Reply.objects.create(message=request.POST['reply'],offer=offer,user_id=user)
 
     return redirect('/view/messages/'+id)
+
+def user_profile(request, id):
+    return render(request, 'unchained_app/user_profile.html')
